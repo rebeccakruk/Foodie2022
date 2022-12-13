@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p>lGzWJ81l4YDt4UPA3aOWTjxDZUxZy2eTxrHjoPy9mPfqX</p>
+        <p>client login</p>
         <div class="user">
             <label for="email">email </label>
             <input type="text" placeholder="Enter Username" name="email" required>
