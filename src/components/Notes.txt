@@ -160,6 +160,13 @@
         in the past we would go to the input box . value and so on
         YOU HAVE TO USE THIS IN ORDER FOR IT TO WORK.
 
+        MORE NOTES
+        API keys without committing them to the project.
+        gitignore file (these are specific to a system, and you do not need to add them)
+        VUE_APP_API_KEY=
+        quick show how v-model works
+
+
     </nav>
 </template>
 

@@ -12,9 +12,9 @@
                                 </v-img>
                                 <v-card-text>
                                     <v-form>
-                                        <v-text-field label="email" name="Email" prepend-inner-icon="mdi-mail"
+                                        <v-text-field v-model="email" label="email" prepend-inner-icon="mdi-mail"
                                             type="email" class="rounded-0" outlined></v-text-field>
-                                        <v-text-field label="password" name="password" prepend-inner-icon="mdi-lock"
+                                        <v-text-field v-model="password" label="password" prepend-inner-icon="mdi-lock"
                                             type="password" class="rounded-0" outlined></v-text-field>
                                         <v-btn @click="login" type="submit" class="rounded-0" color="#000000" x-large
                                             block dark>Login</v-btn>
@@ -42,6 +42,12 @@ import router from '@/router';
 import cookies from 'vue-cookies';
 export default {
     name: "ClientLogin2",
+    data() {
+        return {
+            email: "",
+            password: ""
+        }
+    },
     methods: {
         login() {
             axios.request({
@@ -51,21 +57,18 @@ export default {
                 },
                 method: `POST`,
                 data: {
-                    email: `rebecca7@testing.com`,
-                    // first_name: "Rebecca",
-                    // last_name: "Kruk",
-                    // username: "rebeccaK8",
-                    password: `password1234`
-                    // client_id: 203
+                    email: this.email,
+                    password: this.password
                 },
             }).then((response) => {
                 console.log(response.data.token);
-                cookies.set(`loginToken`, response.data.token)
-                router.push("/Explore")
+                cookies.set(`loginToken`, response.data.token);
+                router.push("/")
             }).catch((error) => {
                 console.log(error);
-            }).finally(() => {
-                console.log(`this is really messed up now.`);
+                // }).finally(() => {
+                //     console.log(`this is really messed up now.`);
+                // 
             });
         }
     }

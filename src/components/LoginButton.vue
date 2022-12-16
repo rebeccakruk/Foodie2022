@@ -24,11 +24,11 @@ export default {
     name: "LoginButton",
     methods: {
         navigateToLogin() {
-            console.log(`is anything even happening?`);
+            console.log(`loginbutton to login`);
             router.push("/login")
         },
         navigateToSignup() {
-            console.log(`is this signing up now?`);
+            console.log(`loginbutton to signup`);
             router.push("/signup")
         }
     }

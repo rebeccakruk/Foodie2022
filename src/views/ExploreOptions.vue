@@ -7,7 +7,8 @@
             <LoginButton />
         </nav>
         <!-- <RestUno /> -->
-
+        <!-- it's either a user or a resto. make sure that one of the cookies is active, or alternativly you have a cookie that says what kind. token has toke, type of user, user id or resto id based on whoever is logged in. 
+could do one for session token, user type, just so you choose to assign the properties of the cookie. once that's there, you can have a dual purpose  -->
     </div>
 </template>
 
