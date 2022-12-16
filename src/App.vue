@@ -1,15 +1,16 @@
 <template>
   <div>
+    <img class="logo" src="https://www.shutterstock.com/image-vector/food-logo-smile-label-company-260nw-1271590297.jpg"
+      alt="logo" />
     <HeaderPage />
-    <ExploreOptions />
     <FooterPage />
+    <router-view />
   </div>
 </template>
 
 <script>
-import HeaderPage from "@/components/HeaderPage.vue";
 import axios from "axios";
-import ExploreOptions from "@/views/ExploreOptions.vue";
+import HeaderPage from "@/components/HeaderPage.vue";
 import FooterPage from "@/components/FooterPage.vue";
 axios.defaults.headers.common['x-api-key'] = 'lGzWJ81l4YDt4UPA3aOWTjxDZUxZy2eTxrHjoPy9mPfqX'
 
@@ -17,7 +18,7 @@ export default {
   name: 'App',
   components: {
     HeaderPage,
-    ExploreOptions,
+
     FooterPage,
   },
   data: () => ({
@@ -25,3 +26,9 @@ export default {
   }),
 };
 </script>
+
+<style scoped>
+.logo {
+  height: 20vh;
+}
+</style>

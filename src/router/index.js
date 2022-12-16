@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import ExploreOptions from '@/views/ExploreOptions'
-import ClientLogin from '@/views/ClientLogin'
+import ExploreOptions from '@/views/ExploreOptions.vue'
+import ClientLogin2 from '@/views/ClientLogin2.vue'
+import ClientSignup from '@/views/ClientSignup.vue'
 
 
 Vue.use(VueRouter)
@@ -14,19 +15,28 @@ const routes = [
       {
         title: "Explore"
       },
-    ]
+    ],
   },
         {
             path : "/login",
-            component : ClientLogin,
+            component : ClientLogin2,
             meta: [
               {
-              title: "Login"
+              title: "User Login"
               },
         ]},
+        {
+          path: "/signup",
+          component : ClientSignup,
+          meta: [
+            {
+              title: "Registration"
+            }
+          ]
+        }
       ]
 const router = new VueRouter({
-  routes
+  routes,
 })
 
 export default router
