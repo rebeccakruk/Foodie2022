@@ -59,12 +59,13 @@ export default {
             firstName: "",
             lastName: "",
             password: "",
+
         }
     },
     methods: {
         register() {
             axios.request({
-                url: "https://foodierest.ml/api/client",
+                url: `https://foodierest.ml/api/client`,
                 header: {
                     "x-api-key": "lGzWJ81l4YDt4UPA3aOWTjxDZUxZy2eTxrHjoPy9mPfqX",
                 },
@@ -75,19 +76,23 @@ export default {
                     firstName: this.firstName,
                     lastName: this.lastName,
                     password: this.password
-                    // pictureUrl: 
+                    // pictureUrl: this.pictureUrl
                     // client_id: 203
                 },
             }).then((response) => {
-                console.log(response);
-                cookies.set(`registered`)
+                let token = response.data;
+                cookies.set(`token`, token);
             }).catch((error) => {
                 console.log(error);
             }).finally(() => {
                 console.log(`here we go again`);
             })
-        }
-    },
+        },
+        mounted() {
+            console.log(this.$cookies.get(`token`).clientId)
+            console.log(`what the hell`);
+        },
+    }
 }
 </script>
 

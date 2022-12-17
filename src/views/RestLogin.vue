@@ -16,8 +16,8 @@
                                             type="email" class="rounded-0" outlined></v-text-field>
                                         <v-text-field v-model="password" label="password" prepend-inner-icon="mdi-lock"
                                             type="password" class="rounded-0" outlined></v-text-field>
-                                        <v-btn @click="login" type="submit" class="rounded-0" color="#000000" x-large
-                                            block dark>Login</v-btn>
+                                        <v-btn @click="restLogin" type="submit" class="rounded-0" color="#000000"
+                                            x-large block dark>Login</v-btn>
                                         <v-card-actions class="text--secondary">
                                             <v-checkbox color="#000000" label="Remember Me"></v-checkbox>
                                             <v-spacer></v-spacer>
@@ -41,7 +41,7 @@ import axios from "axios";
 import router from '@/router';
 import cookies from 'vue-cookies';
 export default {
-    name: "ClientLogin2",
+    name: "RestLogin",
     data() {
         return {
             email: "",
@@ -49,9 +49,9 @@ export default {
         }
     },
     methods: {
-        login() {
+        restLogin() {
             axios.request({
-                url: `https://foodierest.ml/api/client-login`,
+                url: "https://foodierest.ml/api/restaurant-login",
                 header: {
                     "x-api-key": "lGzWJ81l4YDt4UPA3aOWTjxDZUxZy2eTxrHjoPy9mPfqX",
                 },
@@ -61,22 +61,18 @@ export default {
                     password: this.password
                 },
             }).then((response) => {
-                let token = response.data;
-                cookies.set(`token`, token);
-                router.push("/")
+                let restToken = response.data;
+                cookies.set(`restToken`, restToken)
+                router.$push("/rest-main")
             }).catch((error) => {
                 console.log(error);
-                // }).finally(() => {
-                //     console.log(`this is really messed up now.`);
-                // 
-            });
+            })
         },
         mounted() {
-            console.log(this.$cookies.get(`token`).clientId)
+            console.log(this.$cookies.get(`restToken`).restuarantId)
         },
     }
 }
-
 </script>
 
 <style scoped>

@@ -39,7 +39,7 @@
 
         then start making the features for the users and RESTAURANTS
         the next thing (easiest to achieve) is to create a user profile page or restaurant page.
-        You will display the informaiton - need to remember the user page yiou're going to only allow a user
+        You will display the informaiton - need to remember the user page you're going to only allow a user
         who owns that information to use that information. make api call with the token and you'll know you're logged
         in. cookies (token)
 

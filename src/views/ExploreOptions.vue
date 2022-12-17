@@ -5,6 +5,7 @@
         <nav>
             <router-view />
             <LoginButton />
+            <RestLoginButton />
         </nav>
         <!-- <RestUno /> -->
         <!-- it's either a user or a resto. make sure that one of the cookies is active, or alternativly you have a cookie that says what kind. token has toke, type of user, user id or resto id based on whoever is logged in. 
@@ -14,10 +15,12 @@ could do one for session token, user type, just so you choose to assign the prop
 
 <script>
 import LoginButton from "@/components/LoginButton.vue";
+import RestLoginButton from "@/components/RestLoginButton.vue";
 export default {
     name: "ExploreOptions",
     components: {
-        LoginButton
+        LoginButton,
+        RestLoginButton
     },
     mounted() {
         console.log(`Explore component (parent-view)`);

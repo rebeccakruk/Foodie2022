@@ -1,13 +1,12 @@
 <template>
     <div>
-        <h1>FOODee</h1>
-        <h2>Found just what you're craving?</h2>
+        <h1>Restaurant Sign Up</h1>
     </div>
 </template>
 
 <script>
 export default {
-    name: "HeaderPage"
+    name: "RestSignup"
 }
 </script>
 
