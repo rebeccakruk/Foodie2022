@@ -4,7 +4,10 @@
         THEY MUST LOGIN OR REGISTER. THIS WILL BE A BAR AT THE TOP OF THE SCREEN AND THE CHOICES BELOW ON THE PAGE -->
         <nav>
             <router-view />
-            <LoginButton />
+            <LoginButton v-if="!isLoggedIn" />
+            <!-- <ClientLogin /> -->
+            <IsLoggedIn @isLoggedIn="loggedIn" v-if="!isLoggedIn" />
+            <!-- <ClientProfile /> -->
             <RestLoginButton />
         </nav>
         <!-- <RestUno /> -->
@@ -14,18 +17,41 @@ could do one for session token, user type, just so you choose to assign the prop
 </template>
 
 <script>
+import IsLoggedIn from "@/components/IsLoggedIn.vue";
 import LoginButton from "@/components/LoginButton.vue";
+// import ClientLogin from "@/components/ClientLogin.vue";
 import RestLoginButton from "@/components/RestLoginButton.vue";
+// import ClientProfile from "./ClientProfile.vue";
+// import cookies from 'vue-cookies';
+
+// import IsLoggedIn from "@/components/IsLoggedIn.vue";
 export default {
     name: "ExploreOptions",
     components: {
         LoginButton,
-        RestLoginButton
+        RestLoginButton,
+        IsLoggedIn,
+        // ClientLogin,
+        // ClientProfile
     },
-    mounted() {
-        console.log(`Explore component (parent-view)`);
+    data() {
+        return {
+            session: {
+                token: "",
+                clientId: ""
+            },
+            isLoggedIn: false
+        }
     },
+    methods: {
+        loggedIn() {
+            this.isLoggedIn = !this.isLoggedIn
+            this.$root.$on('isLoggedIn', this.IsLoggedIn)
+        },
+    }
 }
+
+
 </script>
 
 <style scoped>

@@ -2,10 +2,10 @@
   <div>
     <img class="logo" src="https://www.shutterstock.com/image-vector/food-logo-smile-label-company-260nw-1271590297.jpg"
       alt="logo" />
+    <router-view />
     <HeaderPage />
     <!-- <SetUp /> -->
     <FooterPage />
-    <router-view />
   </div>
 </template>
 

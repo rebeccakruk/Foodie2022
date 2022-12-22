@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import ExploreOptions from '@/views/ExploreOptions.vue'
-import ClientLogin2 from '@/views/ClientLogin2.vue'
+import ClientLogin from '@/components/ClientLogin.vue'
 import ClientSignup from '@/views/ClientSignup.vue'
+import SignIn from '@/views/SignIn.vue'
+import ClientProfile from '@/views/ClientProfile.vue'
 import RestLogin from '@/views/RestLogin.vue'
 import RestSignup from '@/views/RestSignup.vue'
 import RestMain from '@/views/RestMain.vue'
@@ -22,7 +24,7 @@ const routes = [
   },
         {
             path : "/login",
-            component : ClientLogin2,
+            component : ClientLogin,
             meta: [
               {
               title: "User Login"
@@ -61,6 +63,24 @@ const routes = [
           meta: [
             {
               title: "Restaurant Main"
+            }
+          ]
+        },
+        {
+          path: "/profile",
+          component : ClientProfile,
+          meta: [
+            {
+              title: "Profile"
+            }
+          ]
+        },
+         {
+          path: "/signIn",
+          component : SignIn,
+          meta: [
+            {
+              title: "Sign In"
             }
           ]
         },

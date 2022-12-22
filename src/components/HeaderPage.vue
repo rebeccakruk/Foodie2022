@@ -12,5 +12,12 @@ export default {
 </script>
 
 <style scoped>
+div {
+    background-color: bisque;
+}
 
+h1 {
+    color: brown;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 </style>

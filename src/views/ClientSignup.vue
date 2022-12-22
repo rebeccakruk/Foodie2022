@@ -22,17 +22,17 @@
                                             outlined></v-text-field>
                                         <v-text-field v-model="password" label="password" type="password"
                                             class="rounded-0" outlined></v-text-field>
-                                        <!-- <v-text-field label="avatar" name="picture (optional)"
-                                            prepend-inner-icon="mdi-user" type="img" class="rounded-0"
-                                            outlined></v-text-field> -->
+                                        <v-text-field label="picture (optional)" prepend-inner-icon="mdi-camera"
+                                            type="img" class="rounded-0" outlined></v-text-field>
                                         <v-btn @click="register" type="submit" class="rounded-0" color="#000000" x-large
                                             block dark>Register</v-btn>
                                         <v-card-actions class="text--secondary">
                                             <v-spacer></v-spacer>
                                             <!-- <RouterLink :to="{ name: 'SignUp' }">Sign Up</RouterLink> -->
-                                            Already registered? <a href="/login" class="pl-2" style="color: #000000">Go
+                                            Already registered? <router-link to="/login" class="pl-2"
+                                                style="color: #000000">Go
                                                 back
-                                                to Login</a>
+                                                to Login</router-link>
                                         </v-card-actions>
                                     </v-form>
                                 </v-card-text>
@@ -47,7 +47,7 @@
 
 <script>
 import axios from 'axios';
-// import router from '@/router';
+import router from '@/router';
 import cookies from 'vue-cookies';
 
 export default {
@@ -59,7 +59,7 @@ export default {
             firstName: "",
             lastName: "",
             password: "",
-
+            pictureUrl: null
         }
     },
     methods: {
@@ -75,15 +75,15 @@ export default {
                     username: this.username,
                     firstName: this.firstName,
                     lastName: this.lastName,
-                    password: this.password
-                    // pictureUrl: this.pictureUrl
-                    // client_id: 203
+                    password: this.password,
+                    pictureUrl: this.pictureUrl
                 },
             }).then((response) => {
                 let token = response.data;
                 cookies.set(`token`, token);
             }).catch((error) => {
                 console.log(error);
+                router.push("/");
             }).finally(() => {
                 console.log(`here we go again`);
             })

@@ -166,6 +166,37 @@
         VUE_APP_API_KEY=
         quick show how v-model works
 
+        SATURDAY DEC 17
+        state managers
+        Pinia - if you want, you can use it in your project
+
+        after the winter break, there is an industry presentation night at the end of January
+        figuring out who is going to present
+        it is very important. Make sure we are here on Jan 19, 2023
+
+        start thinking about questions. Mark will mention it when we get closer to the date.
+        by the end of today, we should be done with at least a second view of our choices
+
+        after registration and login.
+
+        strongly recommend moving onto the restaurant page, then move on to adding
+        some menu items.
+
+        pages go under views
+        do we do the main api calls in components then link them into views.
+        yes that's generally how you structure it.
+    
+        have the api calls in separate components. same view based
+        what you can do at login is nullify the token that isn't the active entity
+        if your login as a client you can set the client toekn under clienttoken, then nullfiy the other one.
+        then check when loading the page you're checking weather the restaurant or client is 
+
+        for instance orders - or you can have a cookie that says the current role
+
+        something running in teh anv guards is there active. if not , redirect to login page.
+
+        
+
 
     </nav>
 </template>

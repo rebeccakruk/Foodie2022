@@ -63,13 +63,14 @@ export default {
             }).then((response) => {
                 let restToken = response.data;
                 cookies.set(`restToken`, restToken)
-                router.$push("/rest-main")
+                router.push("/rest-main")
             }).catch((error) => {
                 console.log(error);
             })
         },
         mounted() {
-            console.log(this.$cookies.get(`restToken`).restuarantId)
+            console.log(this.$cookies.get(`restToken`).restuarantId);
+            this.$root.$emit(this.$cookies(`restToken`), this.restToken)
         },
     }
 }
