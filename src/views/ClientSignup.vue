@@ -59,7 +59,9 @@ export default {
             firstName: "",
             lastName: "",
             password: "",
-            pictureUrl: null
+            pictureUrl: null,
+            clientId: "",
+            token: ""
         }
     },
     methods: {
@@ -76,24 +78,32 @@ export default {
                     firstName: this.firstName,
                     lastName: this.lastName,
                     password: this.password,
-                    pictureUrl: this.pictureUrl
+                    pictureUrl: this.pictureUrl,
+                    clientId: this.clientId,
+                    token: this.token
+
                 },
             }).then((response) => {
                 let token = response.data;
-                cookies.set(`token`, token);
+                console.log(token);
+                cookies.set(`token`, token.token);
+                router.push("/");
             }).catch((error) => {
                 console.log(error);
-                router.push("/");
             }).finally(() => {
                 console.log(`here we go again`);
             })
         },
-        mounted() {
-            console.log(this.$cookies.get(`token`).clientId)
-            console.log(`what the hell`);
-        },
-    }
+        getCookie() {
+            cookies.get('token');
+            console.log(cookies);
+        }
+    },
+    mounted() {
+
+    },
 }
+
 </script>
 
 <style scoped>

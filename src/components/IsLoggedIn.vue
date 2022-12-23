@@ -55,9 +55,7 @@ export default {
     //     ClientLogin,
     // },
     data() {
-        return {
-            IsLoggedIn: true
-        }
+
     },
     methods: {
         login() {

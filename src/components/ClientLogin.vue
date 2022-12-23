@@ -1,5 +1,4 @@
 <template>
-
     <v-app>
         <v-main>
             <v-container class="fill-height" fluid>
@@ -15,14 +14,18 @@
 
                                     <v-text-field v-model="email" label="email" prepend-inner-icon="mdi-mail"
                                         type="email" class="rounded-0" outlined></v-text-field>
+
                                     <v-text-field v-model="password" label="password" prepend-inner-icon="mdi-lock"
                                         type="password" class="rounded-0" outlined></v-text-field>
+
                                     <v-btn @click="login" type="submit" class="rounded-0" color="#000000" x-large block
                                         dark>Login</v-btn>
+
                                     <v-card-actions class="text--secondary">
                                         <v-checkbox color="#000000" label="Remember Me"></v-checkbox>
+
                                         <v-spacer></v-spacer>
-                                        <!-- <RouterLink :to="{ name: 'SignUp' }">Sign Up</RouterLink> -->
+
                                         No account? <router-link to="/signup" class="pl-2" style="color: #000000">Sign
                                             Up</router-link>
                                     </v-card-actions>
@@ -45,16 +48,10 @@ import cookies from 'vue-cookies';
 
 export default {
     name: "ClientLogin",
-    props: {
-        session: {
-            clientId: Number,
-            token: String
-        },
-    },
     data() {
         return {
             email: "",
-            password: ""
+            password: "",
         }
     },
     methods: {
@@ -71,22 +68,41 @@ export default {
                 },
             }).then((response) => {
                 cookies.set('clientId', response.data.token)
-                this.$root.$emit('isLoggedIn', this.session)
+                this.$root.$emit('isLoggedIn')
                 router.push("/")
             }).catch((error) => {
                 console.log(error);
             })
-        },
-    }
+        }
+    },
+    // loadProfile() {
+    //     axios.request({
+    //         url: 'https://foodierest.ml/api/client',
+    //         header: {
+    //             "x-api-key": "lGzWJ81l4YDt4UPA3aOWTjxDZUxZy2eTxrHjoPy9mPfqX",
+    //             "token": "this.response.data.token"
+    //         },
+    //         method: 'GET',
+    //         data: {
+    //             response: [
+    //                 {
+    //                     clientId: this.clientId,
+    //                     createdAt: this.createdAt,
+    //                     email: this.email,
+    //                     firstName: this.firstName,
+    //                     lastName: this.lastName,
+    //                     pictureUrl: this.pictureUrl,
+    //                     username: this.username
+    //                 }
+    //             ]
+    //         }
+    //     }).then((response) => {
+    //         let profile = response.data;
+    //         console.log(profile);
+    //     }).catch((error) => {
+    //         console.log(error);
+    //     })
 }
-
-    // let token = cookies.get('token');
-    // console.log(token);
-    // console.log((this.token).clientId);
-    // console.log(this.$cookies.get(`token`).clientId);
-    // console.log(`tId`);
-    // this.$cookies.get('token')
-
 
 
 </script>

@@ -4,10 +4,14 @@
         THEY MUST LOGIN OR REGISTER. THIS WILL BE A BAR AT THE TOP OF THE SCREEN AND THE CHOICES BELOW ON THE PAGE -->
         <nav>
             <router-view />
-            <LoginButton v-if="!isLoggedIn" />
+            <div v-if="!isLoggedIn">
+                <LoginButton />
+            </div>
             <!-- <ClientLogin /> -->
-            <IsLoggedIn @isLoggedIn="loggedIn" v-if="!isLoggedIn" />
-            <!-- <ClientProfile /> -->
+            <div v-else>
+                <IsLoggedIn />
+            </div>
+            <ClientProfile />
             <RestLoginButton />
         </nav>
         <!-- <RestUno /> -->
@@ -21,7 +25,7 @@ import IsLoggedIn from "@/components/IsLoggedIn.vue";
 import LoginButton from "@/components/LoginButton.vue";
 // import ClientLogin from "@/components/ClientLogin.vue";
 import RestLoginButton from "@/components/RestLoginButton.vue";
-// import ClientProfile from "./ClientProfile.vue";
+import ClientProfile from "./ClientProfile.vue";
 // import cookies from 'vue-cookies';
 
 // import IsLoggedIn from "@/components/IsLoggedIn.vue";
@@ -32,23 +36,21 @@ export default {
         RestLoginButton,
         IsLoggedIn,
         // ClientLogin,
-        // ClientProfile
+        ClientProfile
     },
     data() {
         return {
-            session: {
-                token: "",
-                clientId: ""
-            },
             isLoggedIn: false
         }
     },
     methods: {
         loggedIn() {
             this.isLoggedIn = !this.isLoggedIn
-            this.$root.$on('isLoggedIn', this.IsLoggedIn)
-        },
-    }
+        }
+    },
+    mounted() {
+        this.$root.$on('isLoggedIn', this.loggedIn)
+    },
 }
 
 
