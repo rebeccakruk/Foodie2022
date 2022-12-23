@@ -11,6 +11,8 @@
 
 <script>
 import axios from "axios";
+axios.defaults.baseURL = "https://foodierest.ml/api/";
+axios.defaults.headers.common['Authorization'] = `localStorage.auth`;
 import HeaderPage from "@/components/HeaderPage.vue";
 // import SetUp from "@/components/SetUp.vue";
 

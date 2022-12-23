@@ -1,10 +1,14 @@
 <template>
-    <h1>{{ username }}</h1>
+    <div>
+        <h2>{{ username }}</h2>
+        <v-btn @click="getProfile">Hello, loser!</v-btn>
+    </div>
 </template>
 
 <script>
 import axios from 'axios';
-import cookies from 'vue-cookies';
+
+// import cookies from 'vue-cookies';
 
 export default {
     name: "ClientProfile",
@@ -24,41 +28,38 @@ export default {
         }
     },
     methods: {
-        getCookie() {
-            cookies.get('token');
-            console.log(`what the hell`);
-        },
         getProfile() {
-            axios.request({
-                url: "https://foodierest.ml/api/client",
-                method: 'GET',
-                header: {
-                    "token": "cookies.get('token')",
-                    "x-api-key": "lGzWJ81l4YDt4UPA3aOWTjxDZUxZy2eTxrHjoPy9mPfqX",
-                },
-                data:
-                    [
-                        {
-                            clientId: this.clientId,
-                            createdAt: this.createdAt,
-                            email: this.email,
-                            firstName: this.firstName,
-                            lastName: this.lastName,
-                            pictureUrl: null,
-                            username: this.username
-                        }
-                    ]
-            }).then((response) => {
-                console.log(response);
-            }).catch((error) => {
-                console.log(error);
-            })
-            this.$root.$on('isLoggedIn', this.getProfile);
-            console.log(this.$cookies.get('token'));
-            cookies.get('clientId')
+            axios.interceptors.request.use(req => {
+                req.headers.authorization = `Authorization: localStorage.auth`;
+                console.log(`wtffig`);
+                return req;
+            },
+                error => {
+                    return Promise.reject(error);
+                }),
+                axios.request({
+                    url: "https://foodierest.ml/api/client",
+                    method: 'GET',
+                    headers: {
+                        // "token": 'Authorization: localStorage.auth}',
+                        "x-api-key": "lGzWJ81l4YDt4UPA3aOWTjxDZUxZy2eTxrHjoPy9mPfqX",
+                    },
+                }).then((response) => {
+                    console.log(response);
+                }).catch((error) => {
+                    console.log(error);
+                })
+            // this.$root.$on('isLoggedIn', this.getProfile);
+            // console.log(this.$cookies.get('token'));
+            // cookies.get('clientId')
         },
     },
 }
+
+//     }, mounted() {
+//         console.log('AuthorizationHeader is:', this.headers.get('Authorization'));
+//     },
+// }
 </script>
 
 <style scoped>

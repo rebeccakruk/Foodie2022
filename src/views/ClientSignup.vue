@@ -95,8 +95,8 @@ export default {
             })
         },
         getCookie() {
-            cookies.get('token');
-            console.log(cookies);
+            let token = cookies.get('token');
+            console.log(token);
         }
     },
     mounted() {
