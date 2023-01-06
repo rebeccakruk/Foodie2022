@@ -2,8 +2,8 @@
   <div>
     <img class="logo" src="https://www.shutterstock.com/image-vector/food-logo-smile-label-company-260nw-1271590297.jpg"
       alt="logo" />
-    <router-view />
     <HeaderPage />
+    <router-view />
     <!-- <SetUp /> -->
     <FooterPage />
   </div>
@@ -34,6 +34,6 @@ export default {
 
 <style scoped>
 .logo {
-  height: 20vh;
+  height: 10vh;
 }
 </style>

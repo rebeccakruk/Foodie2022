@@ -26,7 +26,7 @@ export default {
     methods: {
         navigateToLogin() {
             console.log(`loginbutton to login`);
-            router.push("/login");
+            router.push("/client");
         },
         navigateToSignup() {
             console.log(`loginbutton to signup`);

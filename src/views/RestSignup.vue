@@ -91,7 +91,7 @@ export default {
                 },
             }).then((response) => {
                 console.log(response.data);
-                let restInfo = response.data;
+                let restInfo = response.data.token;
                 cookies.set(`restToken`, restInfo);
             }).catch((error) => {
                 console.log(error);

@@ -59,7 +59,6 @@ export default {
             firstName: "",
             lastName: "",
             password: "",
-            pictureUrl: null,
             clientId: "",
             token: ""
         }
@@ -69,7 +68,7 @@ export default {
             axios.request({
                 url: `https://foodierest.ml/api/client`,
                 header: {
-                    "x-api-key": "lGzWJ81l4YDt4UPA3aOWTjxDZUxZy2eTxrHjoPy9mPfqX",
+                    "x-api-key": process.env.VUE_APP_API_KEY,
                 },
                 method: 'POST',
                 data: {
@@ -81,12 +80,11 @@ export default {
                     pictureUrl: this.pictureUrl,
                     clientId: this.clientId,
                     token: this.token
-
                 },
             }).then((response) => {
                 let token = response.data;
                 console.log(token);
-                cookies.set(`token`, token.token);
+                cookies.set(`clientToken`, response.data.token);
                 router.push("/");
             }).catch((error) => {
                 console.log(error);
@@ -94,16 +92,13 @@ export default {
                 console.log(`here we go again`);
             })
         },
-        getCookie() {
-            let token = cookies.get('token');
-            console.log(token);
-        }
     },
     mounted() {
-
-    },
+        let clientToken = cookies.get('clientToken');
+        console.log(clientToken);
+        this.$root.$emit('clientToken')
+    }
 }
-
 </script>
 
 <style scoped>

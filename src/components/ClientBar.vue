@@ -1,22 +1,22 @@
 <template>
     <div>
         <v-banner>
+            <h1>show banner here when logged in</h1>
             <v-container fluid>
                 <v-row justify="center">
-                    <h1>banner for logged in client - where to get data from?</h1>
                     <v-expansion-panels popout>
-                        <v-expansion-panel v-for="(data, i) in data" :key="i" hide-actions>
+                        <v-expansion-panel v-for="info in response" :key="info.clientId" hide-actions>
                             <v-expansion-panel-header>
                                 <v-row aligned="center" class="spacer" no-gutters>
                                     <v-col cols="4" sm="2" md="1">
                                         <v-avatar size="66px">
-                                            <img v-if="data.pictureUrl" alt="Avatar"
+                                            <img v-if="response.pictureUrl" alt="Avatar"
                                                 src="https://i.imgflip.com/2acfpw.jpg">
                                         </v-avatar>
                                     </v-col>
 
-                                    <v-col class="hidden-xs-only" sm="5" md="3"> You are logged in as
-                                        <strong v-html="data.firstName"></strong>
+                                    <v-col class="hidden-xs-only" sm="5" md="3"> Hello {{ this.firstName }}
+                                        <strong v-html="response.firstName"></strong>
                                     </v-col>
 
                                     <v-col class="text-no-wrap" cols="5" sm="3">
@@ -41,31 +41,42 @@
                 </v-row>
             </v-container>
         </v-banner>
-        <ClientLogin @isLoggedIn="login" />
     </div>
 </template>
 
 <script>
-// import ClientLogin from '@/components/ClientLogin.vue';
-import router from '@/router';
+import axios from 'axios';
+import cookies from 'vue-cookies';
 
 export default {
-    name: "IsLoggedIn",
-    // components: {
-    //     ClientLogin,
-    // },
+    name: "ClientProfile",
     data() {
-
+        return {
+            response: []
+        }
     },
     methods: {
-        login() {
-            this.$root.$emit('isLoggedIn', this.IsLoggedIn)
-            // this.$root.$emit('isLoggedIn')
+        getProfile() {
+            let clientToken = cookies.get('clientToken')
+            console.log(clientToken, 'barpage');
+            axios.request({
+                url: "https://foodierest.ml/api/client",
+                method: 'GET',
+                headers: {
+                    "token": clientToken,
+                },
+            }).then((response) => {
+                console.log(response);
+            }).catch((error) => {
+                console.log(error);
+            })
+            this.$root.$on('loggedIn', this.getProfile);
+            // console.log(this.$cookies.get('token'));
+            // cookies.get('clientId')
         },
-        loadProfile() {
-            router.push("/profile")
-            this.$root.$emit('load')
-        }
+    },
+    mounted() {
+        this.getProfile();
     },
 }
 

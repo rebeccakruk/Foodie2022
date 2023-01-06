@@ -59,7 +59,7 @@ export default {
             axios.request({
                 url: `https://foodierest.ml/api/client-login`,
                 header: {
-                    "x-api-key": "lGzWJ81l4YDt4UPA3aOWTjxDZUxZy2eTxrHjoPy9mPfqX",
+                    "x-api-key": process.env.VUE_APP_API_KEY,
                 },
                 method: `POST`,
                 data: {
@@ -67,45 +67,17 @@ export default {
                     password: this.password
                 },
             }).then((response) => {
-                cookies.set('clientId', response.data.token)
-                this.$root.$emit('isLoggedIn')
+                cookies.set('clientToken', response.data.token)
                 router.push("/")
             }).catch((error) => {
                 console.log(error);
             })
         }
-
-        // loadProfile() {
-        //     axios.request({
-        //         url: 'https://foodierest.ml/api/client',
-        //         header: {
-        //             "x-api-key": "lGzWJ81l4YDt4UPA3aOWTjxDZUxZy2eTxrHjoPy9mPfqX",
-        //             "token": "this.response.data.token"
-        //         },
-        //         method: 'GET',
-        //         data: {
-        //             response: [
-        //                 {
-        //                     clientId: this.clientId,
-        //                     createdAt: this.createdAt,
-        //                     email: this.email,
-        //                     firstName: this.firstName,
-        //                     lastName: this.lastName,
-        //                     pictureUrl: this.pictureUrl,
-        //                     username: this.username
-        //                 }
-        //             ]
-        //         }
-        //     }).then((response) => {
-        //         let profile = response.data;
-        //         console.log(profile);
-        //     }).catch((error) => {
-        //         console.log(error);
-        //     })
     },
     mounted() {
-        let token = cookies.get('clientId');
-        console.log(token);
+        let clientToken = cookies.get('clientToken');
+        console.log(clientToken);
+        this.$root.$emit('loggedIn')
     },
 }
 

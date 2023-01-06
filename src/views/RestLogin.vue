@@ -53,7 +53,8 @@ export default {
             axios.request({
                 url: "https://foodierest.ml/api/restaurant-login",
                 header: {
-                    "x-api-key": "lGzWJ81l4YDt4UPA3aOWTjxDZUxZy2eTxrHjoPy9mPfqX",
+                    "x-api-key": process.env.VUE_APP_API_KEY,
+
                 },
                 method: `POST`,
                 data: {
@@ -61,16 +62,16 @@ export default {
                     password: this.password
                 },
             }).then((response) => {
-                let restToken = response.data;
-                cookies.set(`restToken`, restToken)
+                cookies.set('restToken', response.data.token)
                 router.push("/rest-main")
             }).catch((error) => {
                 console.log(error);
             })
         },
         mounted() {
-            console.log(this.$cookies.get(`restToken`).restuarantId);
-            this.$root.$emit(this.$cookies(`restToken`), this.restToken)
+            let restToken = cookies.get('restToken');
+            console.log(restToken);
+            this.$root.$emit('loggedIn')
         },
     }
 }

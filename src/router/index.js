@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import ExploreOptions from '@/views/ExploreOptions.vue'
-import ClientLogin from '@/components/ClientLogin.vue'
-import ClientSignup from '@/views/ClientSignup.vue'
+import ClientPage from '@/views/ClientPage.vue'
+import ClientSignup from '@/components/ClientSignup.vue'
 import SignIn from '@/views/SignIn.vue'
-import ClientProfile from '@/views/ClientProfile.vue'
 import RestLogin from '@/views/RestLogin.vue'
 import RestSignup from '@/views/RestSignup.vue'
 import RestMain from '@/views/RestMain.vue'
+import RestList from '@/components/RestList.vue'
+import ViewMenu from '@/views/ViewMenu.vue'
+
 
 
 Vue.use(VueRouter)
@@ -23,11 +25,11 @@ const routes = [
     ],
   },
         {
-            path : "/login",
-            component : ClientLogin,
+            path : "/client",
+            component : ClientPage,
             meta: [
               {
-              title: "User Login"
+              title: "Client"
               },
         ]},
         {
@@ -66,21 +68,30 @@ const routes = [
             }
           ]
         },
-        {
-          path: "/profile",
-          component : ClientProfile,
-          meta: [
-            {
-              title: "Profile"
-            }
-          ]
-        },
          {
           path: "/signIn",
           component : SignIn,
           meta: [
             {
               title: "Sign In"
+            }
+          ]
+        },
+                 {
+          path: "/restList",
+          component : RestList,
+          meta: [
+            {
+              title: "Restaurant List"
+            }
+          ]
+        },
+                 {
+          path: "/menu",
+          component : ViewMenu,
+          meta: [
+            {
+              title: "Menu"
             }
           ]
         },
