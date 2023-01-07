@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ClientBar />
+        <ClientProfile />
         <ClientLogin />
         <ClientSignup />
         <EditClient />
@@ -9,15 +9,15 @@
 </template>
 
 <script>
+import ClientProfile from '@/components/ClientProfile.vue';
 import ClientLogin from '@/components/ClientLogin.vue';
-import ClientBar from '@/components/ClientBar.vue';
 import ClientSignup from '@/components/ClientSignup.vue';
 import cookies from 'vue-cookies';
 
 export default {
     name: "ClientPage",
     components: {
-        ClientBar,
+        ClientProfile,
         ClientLogin,
         ClientSignup
     },

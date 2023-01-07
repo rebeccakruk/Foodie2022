@@ -5,13 +5,16 @@
         <nav>
             <router-view />
 
+            <ClientProfile />
+
             <LoginButton />
 
-            <ClientBar />
+            <ClientBarCard />
 
             <RestList />
 
             <ClientLogin />
+
 
             <RestLoginButton />
         </nav>
@@ -24,16 +27,17 @@ could do one for session token, user type, just so you choose to assign the prop
     if we're looking at resto #5 the user ended up on path /restaurant/5, on mounted, it will look at the router, and go with the restaurant id, then direct you to that menu only
     it's late enough in the project where he needs to just guide us through. https://v3.router.vuejs.org/guide/essentials/dynamic-matching.html  -->
     <!-- only work with this working perfectly, with no mistakes. try to figure it out on your own. -->
-    <!-- that's what will help you to get a specific restaurant. the optional parameter will send us information about the specific restaurant that we will require -->
+
     <!--  -->
 </template>
 
 <script>
 import LoginButton from "@/components/LoginButton.vue";
 import RestList from "@/components/RestList.vue";
+import ClientProfile from "@/components/ClientProfile.vue";
 import ClientLogin from "@/components/ClientLogin.vue";
 import RestLoginButton from "@/components/RestLoginButton.vue";
-import ClientBar from "@/components/ClientBar.vue";
+import ClientBarCard from "@/components/ClientBarCard.vue";
 import cookies from 'vue-cookies';
 
 // import IsLoggedIn from "@/components/IsLoggedIn.vue";
@@ -44,7 +48,8 @@ export default {
         RestList,
         RestLoginButton,
         ClientLogin,
-        ClientBar
+        ClientProfile,
+        ClientBarCard
     },
     data() {
         return {
