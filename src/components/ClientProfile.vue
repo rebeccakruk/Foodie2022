@@ -52,7 +52,7 @@ export default {
             }).then((response) => {
                 this.clientGet = response.data;
                 for (let i = 0; i < this.clientGet.length; i++)
-                    console.log(this.clientGet);
+                    console.log(response);
             }).catch((error) => {
                 console.log(error);
             });
@@ -60,8 +60,7 @@ export default {
         }
     },
     mounted() {
-        this.loadClient()
-        // this.$root.$emit('clientToken', this.loadClient())
+        this.loadClient();
     },
 }
 </script>

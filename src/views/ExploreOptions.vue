@@ -4,21 +4,15 @@
         THEY MUST LOGIN OR REGISTER. THIS WILL BE A BAR AT THE TOP OF THE SCREEN AND THE CHOICES BELOW ON THE PAGE -->
         <nav>
             <router-view />
+            <ClientBarCard v-if="userLoggedIn()" />
 
-            <ClientProfile />
-
-            <LoginButton />
-
-            <ClientBarCard />
+            <LoginButton v-if="!userLoggedIn()" />
 
             <RestList />
 
-            <ClientLogin />
-
-
             <RestLoginButton />
         </nav>
-        <!-- <RestUno /> -->
+
         <!-- it's either a user or a resto. make sure that one of the cookies is active, or alternativly you have a cookie that says what kind. token has toke, type of user, user id or resto id based on whoever is logged in. 
 could do one for session token, user type, just so you choose to assign the properties of the cookie. once that's there, you can have a dual purpose  -->
     </div>
@@ -27,58 +21,41 @@ could do one for session token, user type, just so you choose to assign the prop
     if we're looking at resto #5 the user ended up on path /restaurant/5, on mounted, it will look at the router, and go with the restaurant id, then direct you to that menu only
     it's late enough in the project where he needs to just guide us through. https://v3.router.vuejs.org/guide/essentials/dynamic-matching.html  -->
     <!-- only work with this working perfectly, with no mistakes. try to figure it out on your own. -->
-
-    <!--  -->
 </template>
 
 <script>
 import LoginButton from "@/components/LoginButton.vue";
 import RestList from "@/components/RestList.vue";
-import ClientProfile from "@/components/ClientProfile.vue";
-import ClientLogin from "@/components/ClientLogin.vue";
 import RestLoginButton from "@/components/RestLoginButton.vue";
 import ClientBarCard from "@/components/ClientBarCard.vue";
 import cookies from 'vue-cookies';
 
-// import IsLoggedIn from "@/components/IsLoggedIn.vue";
 export default {
     name: "ExploreOptions",
     components: {
         LoginButton,
         RestList,
         RestLoginButton,
-        ClientLogin,
-        ClientProfile,
         ClientBarCard
-    },
-    data() {
-        return {
-            loggedIn: false
-        }
     },
     methods: {
         userLoggedIn() {
             let client = cookies.get('clientToken')
-            console.log(client);
-
+            if (client == null) {
+                return false
+            } else {
+                return true
+            }
         },
         restoLoggedIn() {
             let resto = cookies.get('restToken')
-            console.log(resto);
-            // isLoggedIn() {
-            //     this.loggedIn = !this.loggedIn
-            // }
-        },
-        mounted() {
-            // this.$root.$on('loggedIn', this.loggedIn)
-            let user = cookies.get('clientToken')
-            console.log(user)
-
-            // this.$root.$on(`listOptions`)
-
-
+            if (resto == null) {
+                return false
+            } else {
+                return true
+            }
         }
-    },
+    }
 }
 
 

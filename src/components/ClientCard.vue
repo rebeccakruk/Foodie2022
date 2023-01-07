@@ -82,7 +82,7 @@
 
                     </v-list>
 
-                    <v-img :src="clientImg" height="200px"></v-img>
+                    <img :src="clientImg" height="200px">
 
                 </v-card>
             </v-col>
@@ -94,7 +94,7 @@
 export default {
     name: "ClientCard",
     props: {
-        clientId: String,
+        clientId: Number,
         clientCreatedAt: String,
         clientEmail: String,
         clientFName: String,
@@ -104,8 +104,9 @@ export default {
             default: "https://m.media-amazon.com/images/M/MV5BOTkzNDg0ODg4MF5BMl5BanBnXkFtZTYwNDEwOTEz._V1_.jpg"
         },
         clientUsername: String
-    },
+    }
 }
+
 </script>
 
 <style scoped>
