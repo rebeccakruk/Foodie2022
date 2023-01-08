@@ -1,9 +1,9 @@
 <template>
     <div>
-        <ClientProfile />
+        <EditTwo />
+        <ClientProfile :key="forceReload" />
         <ClientLogin />
         <ClientSignup />
-        <EditClient />
         <DeleteClient />
     </div>
 </template>
@@ -12,6 +12,7 @@
 import ClientProfile from '@/components/ClientProfile.vue';
 import ClientLogin from '@/components/ClientLogin.vue';
 import ClientSignup from '@/components/ClientSignup.vue';
+import EditTwo from '@/components/EditTwo.vue';
 import cookies from 'vue-cookies';
 
 export default {
@@ -19,26 +20,31 @@ export default {
     components: {
         ClientProfile,
         ClientLogin,
+        EditTwo,
         ClientSignup
     },
     data() {
         return {
-            hasToken: false
+            forceReload: 0
         }
     },
     methods: {
         cookieWho() {
-            let cookie = cookies.get('clientToken')
-            if (cookies.get('clientToken') === 'true') {
+            let cookie = cookies.get('token')
+            if (cookies.get('token') === 'true') {
                 console.log(cookie, 'true');
             } else {
                 console.log('false');
             }
+        },
+        reload() {
+            this.forceReload += 1
+            console.log('this thing on?');
         }
     },
-    mounted() {
-        this.cookieWho();
-    },
+    // mounted() {
+    //     this.cookieWho();
+    // },
 }
 </script>
 

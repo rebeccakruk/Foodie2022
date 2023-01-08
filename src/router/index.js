@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import ExploreOptions from '@/views/ExploreOptions.vue'
 import ClientPage from '@/views/ClientPage.vue'
 import ClientSignup from '@/components/ClientSignup.vue'
+import EditProfile from '@/components/EditProfile.vue'
 import SignIn from '@/views/SignIn.vue'
 import RestLogin from '@/views/RestLogin.vue'
 import RestSignup from '@/views/RestSignup.vue'
@@ -38,6 +39,15 @@ const routes = [
           meta: [
             {
               title: "Registration"
+            }
+          ]
+        },
+        {
+          path: "/edit",
+          component : EditProfile,
+          meta: [
+            {
+              title: "Edit User Info"
             }
           ]
         },

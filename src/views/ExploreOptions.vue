@@ -7,7 +7,7 @@
             <ClientBarCard v-if="userLoggedIn()" />
 
             <LoginButton v-if="!userLoggedIn()" />
-
+            <img src="https://i.imgflip.com/2acfpw.jpg">
             <RestList />
 
             <RestLoginButton />
@@ -40,7 +40,7 @@ export default {
     },
     methods: {
         userLoggedIn() {
-            let client = cookies.get('clientToken')
+            let client = cookies.get('token')
             if (client == null) {
                 return false
             } else {

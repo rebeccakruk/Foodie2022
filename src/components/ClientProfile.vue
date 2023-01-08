@@ -28,7 +28,7 @@ export default {
     },
     methods: {
         loadClient() {
-            let clientToken = cookies.get("clientToken");
+            let clientToken = cookies.get("token");
             console.log(clientToken, "barpage");
             axios.request({
                 url: "https://foodierest.ml/api/client",

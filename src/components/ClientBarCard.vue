@@ -7,14 +7,18 @@
                         <v-expansion-panel-header hide actions>
                             <v-row aligned="center" class="spacer" no-gutters>
                                 <v-col cols="4" sm="2" md="1">
-                                    <v-avatar size="36px">
-                                        <img :src="clientImg">
-                                        <v-icon></v-icon>
+                                    <v-avatar size="48px">
+                                        <div v-if="clientImg">
+                                            <img :src="clientImg" height="50px">
+                                        </div>
+                                        <div v-else>
+                                            <v-icon>mdi-account-circle</v-icon>
+                                        </div>
                                     </v-avatar>
                                 </v-col>
 
                                 <v-col class="hidden-xs-only" sm="5" md="3">
-                                    {{ clientFName }} {{ clientLName }}
+                                    <strong>{{ clientFName }}</strong>
                                 </v-col>
 
                                 <v-col class="test-no-wrap" cols="5" sm="3">
@@ -27,18 +31,24 @@
                         </v-expansion-panel-header>
                         <v-expansion-panel-content>
                             <v-divider></v-divider>
+                            {{ clientFName }}
                             <v-btn @click="viewHistory">View Order History</v-btn>
-                            <v-btn @click="edit">View / Edit Profile</v-btn>
-                            <v-btn @click="changePassword">Change Password</v-btn>
+                            <v-btn @click="toProfile">View / Edit Profile</v-btn>
+                            <v-btn @click="logout">Sign Out</v-btn>
                         </v-expansion-panel-content>
                     </v-expansion-panel>
                 </v-expansion-panels>
             </v-row>
         </v-container>
+
     </div>
 </template>
 
 <script>
+import router from '@/router';
+import cookies from 'vue-cookies';
+
+
 
 
 export default {
@@ -51,9 +61,29 @@ export default {
         clientLName: String,
         clientImg: {
             type: String,
-            default: "https://m.media-amazon.com/images/M/MV5BOTkzNDg0ODg4MF5BMl5BanBnXkFtZTYwNDEwOTEz._V1_.jpg"
         },
         clientUsername: String
+    },
+    methods: {
+        toProfile() {
+            console.log(`edit`);
+            router.push("/client");
+        },
+        logout() {
+            let userlogout = cookies.remove('token')
+            if (userlogout == null) {
+                router.push("/")
+            } else {
+                return false
+            }
+        },
+        viewHistory() {
+            console.log('viewhistory');
+            router.push("/")
+        }
+    },
+    mounted() {
+        console.log(this.clientFName);
     },
 }
 

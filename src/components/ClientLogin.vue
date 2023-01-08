@@ -67,7 +67,7 @@ export default {
                     password: this.password
                 },
             }).then((response) => {
-                cookies.set('clientToken', response.data.token)
+                cookies.set('token', response.data.token)
                 router.push("/")
             }).catch((error) => {
                 console.log(error);
@@ -75,9 +75,8 @@ export default {
         }
     },
     mounted() {
-        let clientToken = cookies.get('clientToken');
+        let clientToken = cookies.get('token');
         console.log(clientToken);
-        this.$root.$emit('loggedIn')
     },
 }
 

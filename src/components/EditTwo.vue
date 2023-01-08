@@ -1,5 +1,5 @@
 <template>
-    <v-app>
+    <div>
         <v-main>
             <v-container class="fill-height" fluid>
                 <v-row alignment="center" justify="center" dense>
@@ -24,8 +24,8 @@
                                     <v-text-field v-model="pictureUrl" label="picture (optional)"
                                         prepend-inner-icon="mdi-camera" type="img" class="rounded-0"
                                         outlined></v-text-field>
-                                    <v-btn @click="submitEdit" type="submit" class="rounded-0" color="#000000" x-large
-                                        block dark>Submit Changes</v-btn>
+                                    <v-btn @click="postIt" type="submit" class="rounded-0" color="#000000" x-large block
+                                        dark>Submit Changes</v-btn>
                                     <v-card-actions class="text--secondary">
                                         <v-spacer></v-spacer>
                                         <router-link to="/" class="pl-2" style="color: #000000">Home</router-link>
@@ -37,17 +37,27 @@
                 </v-row>
             </v-container>
         </v-main>
-    </v-app>
+        <!-- <label>username</label>
+        <input type="text" v-model="username">
+        <label>firstName</label>
+        <input type="text" v-model="firstName">
+        <label>lastName</label>
+        <input type="text" v-model="lastName">
+        <label>password</label>
+        <input type="text" v-model="password">
+        <label>picture</label>
+        <input type="img" v-model="pictureUrl">
 
+        <button @click="postIt">Submit</button> -->
+    </div>
 </template>
 
 <script>
 import axios from 'axios';
-import router from '@/router';
 import cookies from 'vue-cookies';
 
 export default {
-    name: "EditProfile",
+    name: "EditTwo",
     data() {
         return {
             email: "",
@@ -58,18 +68,18 @@ export default {
             pictureUrl: {
                 type: String
             },
-            value: String
+            random: String
         }
     },
     methods: {
-        submitEdit() {
-            let clientToken = cookies.get('token')
+        postIt() {
+            let token = cookies.get('token')
             axios.request({
                 url: 'https://foodierest.ml/api/client',
                 method: 'PATCH',
                 headers: {
-                    "token": clientToken,
-                    "x-api-key": process.env.VUE_APP_API_KEY
+                    "x-api-key": process.env.VUE_APP_API_KEY,
+                    "token": token
                 },
                 data: {
                     email: this.email,
@@ -77,18 +87,15 @@ export default {
                     firstName: this.firstName,
                     lastName: this.lastName,
                     password: this.password,
-                    pictureUrl: this.pictureUrl,
-                },
+                    pictureUrl: this.pictureUrl
+                }
             }).then((response) => {
-                router.push("/");
                 console.log(response, 'hello!');
             }).catch((error) => {
                 console.log(error);
-            }).finally(() => {
-                console.log(document.cookie);
             })
         }
-    }
+    },
 }
 </script>
 

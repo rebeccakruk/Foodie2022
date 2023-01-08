@@ -60,6 +60,9 @@ export default {
             lastName: "",
             password: "",
             clientId: "",
+            pictureUrl: {
+                type: String
+            },
             token: ""
         }
     },
@@ -84,7 +87,7 @@ export default {
             }).then((response) => {
                 let token = response.data;
                 console.log(token);
-                cookies.set(`clientToken`, response.data.token);
+                cookies.set(`token`, response.data.token);
                 router.push("/");
             }).catch((error) => {
                 console.log(error);
@@ -94,9 +97,9 @@ export default {
         },
     },
     mounted() {
-        let clientToken = cookies.get('clientToken');
+        let clientToken = cookies.get('token');
         console.log(clientToken);
-        this.$root.$emit('clientToken')
+        this.$root.$emit('token')
     }
 }
 </script>
