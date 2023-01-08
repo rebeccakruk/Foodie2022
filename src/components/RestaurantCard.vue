@@ -17,7 +17,7 @@
 
             <v-card-actions>
                 <v-btn color="orange" text>
-                    Order Same as Last Time
+                    Orders
                 </v-btn>
 
                 <v-btn color="orange" text>

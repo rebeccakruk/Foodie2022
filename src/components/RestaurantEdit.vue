@@ -24,12 +24,8 @@
                                     <v-text-field v-model="pictureUrl" label="picture (optional)"
                                         prepend-inner-icon="mdi-camera" type="img" class="rounded-0"
                                         outlined></v-text-field>
-                                    <v-btn @click="postIt" type="submit" class="rounded-0" color="#000000" x-large block
-                                        dark>Submit Changes</v-btn>
-                                    <v-spacer></v-spacer>
-                                    <!-- <v-btn @click="deleted" type="submit" class="rounded-0" color="#8255" large block
-                                        dark><router-link to="/delete" class="rounded-0" color:="#8255">Delete
-                                            Account</router-link></v-btn> -->
+                                    <v-btn @click="confirmEdit" type="submit" class="rounded-0" color="#000000" x-large
+                                        block dark>Submit Changes</v-btn>
                                     <v-card-actions class="text--secondary">
                                         <v-spacer></v-spacer>
                                         <router-link to="/" class="pl-2" style="color: #000000">Home</router-link>
@@ -41,91 +37,52 @@
                 </v-row>
             </v-container>
         </v-main>
-        <!-- <label>username</label>
-        <input type="text" v-model="username">
-        <label>firstName</label>
-        <input type="text" v-model="firstName">
-        <label>lastName</label>
-        <input type="text" v-model="lastName">
-        <label>password</label>
-        <input type="text" v-model="password">
-        <label>picture</label>
-        <input type="img" v-model="pictureUrl">
-        <button @click="postIt">Submit</button> -->
-        <v-btn @click="eraseUser(event)" type="submit">DELETE USER</v-btn>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
-import router from '@/router';
-import cookies from 'vue-cookies';
 
 export default {
-    name: "EditTwo",
-    data() {
-        return {
-            email: "",
-            username: "",
-            firstName: "",
-            lastName: "",
-            password: "",
-            pictureUrl: {
-                type: String
-            },
-        }
+    name: "RestaurantEdit",
+    props: {
+        name: String,
+        address: String,
+        bannerUrl: String,
+        bio: String,
+        email: String,
+        phoneNum: String,
+        profileUrl: String,
+        restaurantId: Number,
+        value: String,
     },
     methods: {
-        postIt() {
-            let token = cookies.get('token')
+        confirmEdit() {
+            let restoToken = cookies.get('restToken')
             axios.request({
-                url: 'https://foodierest.ml/api/client',
-                method: 'PATCH',
+                url: "https://foodierest.ml/api/restaurant",
                 headers: {
-                    "x-api-key": process.env.VUE_APP_API_KEY,
-                    "token": token
+                    "token": restoToken,
+                    "x-api-key": process.env.VUE_APP_API_KEY
                 },
+                method: "PATCH",
                 data: {
+                    name: this.name,
+                    address: this.address,
+                    bannerUrl: this.bannerUrl,
+                    bio: this.bio,
                     email: this.email,
-                    username: this.username,
-                    firstName: this.firstName,
-                    lastName: this.lastName,
-                    password: this.password,
-                    pictureUrl: this.pictureUrl
-                }
-            }).then((response) => {
-                console.log(response, 'hello!');
-            }).catch((error) => {
-                console.log(error);
-            })
-        },
-        // deletePage() {
-        //     router.push("/delete")
-        // }
-
-        // deleted() {
-        //     this.deleted = !this.deleted
-        // },
-        eraseUser() {
-            let token = cookies.get('token')
-            axios.request({
-                url: 'https://foodierest.ml/api/client',
-                method: 'DELETE',
-                headers: {
-                    "x-api-key": process.env.VUE_APP_API_KEY,
-                    "token": token
+                    phoneNum: this.phoneNum,
+                    profileUrl: this.profileUrl,
+                    restaurantId: this.restaurantId
                 }
             }).then((response) => {
                 console.log(response);
-                cookies.remove('token')
-                if (token == null) {
-                    router.push("/")
-                } else {
-                    return true
-                }
+            }).catch((error) => {
+                console.log(error);
             })
         }
-    }
+    },
 }
 </script>
 

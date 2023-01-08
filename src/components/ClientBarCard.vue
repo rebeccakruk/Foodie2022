@@ -47,6 +47,7 @@
 <script>
 import router from '@/router';
 import cookies from 'vue-cookies';
+import axios from 'axios';
 
 
 
@@ -70,12 +71,26 @@ export default {
             router.push("/client");
         },
         logout() {
-            let userlogout = cookies.remove('token')
-            if (userlogout == null) {
-                router.push("/")
-            } else {
-                return false
-            }
+            let userlogout = cookies.get('token')
+            axios.request({
+                url: "https://foodierest.ml/api/client-login",
+                headers: {
+                    "x-api-key": process.env.VUE_APP_API_KEY,
+                    "token": userlogout
+                },
+                method: "DELETE"
+            }).then((response) => {
+                let logout = cookies.remove('token')
+                console.log(logout, 'deleting cookies');
+                console.log(response);
+                if (userlogout == null) {
+                    router.push("/")
+                } else {
+                    return false
+                }
+            }).catch((error) => {
+                console.log(error);
+            })
         },
         viewHistory() {
             console.log('viewhistory');

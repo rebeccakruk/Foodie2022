@@ -30,6 +30,7 @@ import RestLoginButton from "@/components/RestLoginButton.vue";
 import ClientBarCard from "@/components/ClientBarCard.vue";
 import cookies from 'vue-cookies';
 
+
 export default {
     name: "ExploreOptions",
     components: {

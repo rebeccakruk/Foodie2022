@@ -1,10 +1,9 @@
 <template>
     <div>
         <EditTwo />
-        <ClientProfile :key="forceReload" />
+        <ClientProfile />
         <ClientLogin />
         <ClientSignup />
-        <DeleteClient />
     </div>
 </template>
 
