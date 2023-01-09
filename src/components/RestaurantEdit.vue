@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div v-for="rest in restaurants" :key="rest.id">
+            <router-link :to="'/rest-main/' + rest.id">{{ rest.name }}</router-link>
+        </div>
         <v-main>
             <v-container class="fill-height" fluid>
                 <v-row alignment="center" justify="center" dense>
@@ -11,21 +14,32 @@
                             </v-img>
                             <v-card-text>
                                 <v-form>
-                                    <v-text-field v-model="username" label="username" prepend-inner-icon="mdi-pencil"
+                                    <v-text-field v-model="name" label="name" prepend-inner-icon="mdi-pencil"
                                         type="text" class="rounded-0" outlined></v-text-field>
-                                    <v-text-field v-model="firstName" label="firstName" prepend-inner-icon="mdi-pencil"
+
+                                    <v-text-field v-model="address" label="address" prepend-inner-icon="mdi-pencil"
                                         type="text" class="rounded-0" outlined></v-text-field>
-                                    <v-text-field v-model="lastName" label="lastName" prepend-inner-icon="mdi-pencil"
-                                        type="text" class="rounded-0" outlined></v-text-field>
-                                    <v-text-field v-model="password" label="new password"
-                                        :append-icon="value ? 'mdi-eye' : 'mdi-eye-off'"
-                                        @click:append="() => (value = !value)" :type="value ? 'password' : 'text'"
+
+                                    <v-text-field v-model="bio" label="bio" prepend-inner-icon="mdi-pencil" type="text"
                                         class="rounded-0" outlined></v-text-field>
-                                    <v-text-field v-model="pictureUrl" label="picture (optional)"
+
+                                    <v-text-field v-model="city" label="city" prepend-inner-icon="mdi-pencil"
+                                        type="text" class="rounded-0" outlined></v-text-field>
+
+                                    <v-text-field v-model="phoneNum" label="phone number" prepend-inner-icon="mdi-phone"
+                                        type="text" class="rounded-0" outlined></v-text-field>
+
+                                    <v-text-field v-model="bannerUrl" label="banner (recommended)"
                                         prepend-inner-icon="mdi-camera" type="img" class="rounded-0"
                                         outlined></v-text-field>
+
+                                    <v-text-field v-model="pictureUrl" label="picture (recommended)"
+                                        prepend-inner-icon="mdi-camera" type="img" class="rounded-0"
+                                        outlined></v-text-field>
+
                                     <v-btn @click="confirmEdit" type="submit" class="rounded-0" color="#000000" x-large
-                                        block dark>Submit Changes</v-btn>
+                                        block dark>Confirm Changes</v-btn>
+
                                     <v-card-actions class="text--secondary">
                                         <v-spacer></v-spacer>
                                         <router-link to="/" class="pl-2" style="color: #000000">Home</router-link>
@@ -42,19 +56,23 @@
 
 <script>
 import axios from 'axios';
+import cookies from 'vue-cookies';
 
 export default {
     name: "RestaurantEdit",
-    props: {
-        name: String,
-        address: String,
-        bannerUrl: String,
-        bio: String,
-        email: String,
-        phoneNum: String,
-        profileUrl: String,
-        restaurantId: Number,
-        value: String,
+    data() {
+        return {
+            name: String,
+            address: String,
+            bannerUrl: String,
+            bio: String,
+            city: String,
+            email: String,
+            phoneNum: String,
+            pictureUrl: String,
+            restaurantId: Number,
+            restaurants: []
+        }
     },
     methods: {
         confirmEdit() {
@@ -71,9 +89,10 @@ export default {
                     address: this.address,
                     bannerUrl: this.bannerUrl,
                     bio: this.bio,
+                    city: this.city,
                     email: this.email,
                     phoneNum: this.phoneNum,
-                    profileUrl: this.profileUrl,
+                    pictureUrl: this.pictureUrl,
                     restaurantId: this.restaurantId
                 }
             }).then((response) => {
@@ -81,9 +100,27 @@ export default {
             }).catch((error) => {
                 console.log(error);
             })
+        },
+        loadResto() {
+            axios.request({
+                url: "https://foodierest.ml/api/restaurant",
+                headers: {
+                    "x-api-key": process.env.VUE_APP_API_KEY
+                },
+                method: "GET",
+            }).then((response) => {
+                let info = response.data
+                console.log(info);
+            }).catch((error) => {
+                console.log(error);
+            })
         }
     },
+    mounted() {
+        this.loadResto()
+    }
 }
+
 </script>
 
 <style scoped>

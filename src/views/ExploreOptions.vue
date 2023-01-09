@@ -10,7 +10,7 @@
             <img src="https://i.imgflip.com/2acfpw.jpg">
             <RestList />
 
-            <RestLoginButton />
+            <RestLoginButton v-if="!restoLoggedIn()" />
         </nav>
 
         <!-- it's either a user or a resto. make sure that one of the cookies is active, or alternativly you have a cookie that says what kind. token has toke, type of user, user id or resto id based on whoever is logged in. 

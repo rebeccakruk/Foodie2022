@@ -1,16 +1,19 @@
 <template>
     <div>
-
+        <RestOwnerCard />
     </div>
 </template>
 
 <script>
 import axios from 'axios';
+import cookies from 'vue-cookies';
+import RestOwnerCard from '@/components/RestOwnerCard.vue';
+
 
 export default {
     name: "RestaurantProfile",
     components: {
-        MenuCard,
+        RestOwnerCard
     },
     data() {
         return {
@@ -19,19 +22,19 @@ export default {
     },
     methods: {
         loadResto() {
-            let restoToken = cookies.get('restToken')
+            let restoToken = cookies.get("restToken");
             console.log(restoToken);
             axios.request({
                 url: "https://foodierest.ml/api/restaurant",
                 method: "GET",
                 headers: {
-                    "x-api-key": restoToken
+                    "x-api-key": process.env.VUE_APP_API_KEY
                 },
             }).then((response) => {
                 this.restoGet = response.data;
             }).catch((error) => {
                 console.log(error);
-            })
+            });
         }
     },
     mounted() {

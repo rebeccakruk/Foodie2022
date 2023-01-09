@@ -41,17 +41,6 @@
                 </v-row>
             </v-container>
         </v-main>
-        <!-- <label>username</label>
-        <input type="text" v-model="username">
-        <label>firstName</label>
-        <input type="text" v-model="firstName">
-        <label>lastName</label>
-        <input type="text" v-model="lastName">
-        <label>password</label>
-        <input type="text" v-model="password">
-        <label>picture</label>
-        <input type="img" v-model="pictureUrl">
-        <button @click="postIt">Submit</button> -->
         <v-btn @click="eraseUser(event)" type="submit">DELETE USER</v-btn>
     </div>
 </template>

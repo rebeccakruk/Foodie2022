@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import ExploreOptions from '@/views/ExploreOptions.vue'
+// import ExploreOptions from '@/views/ExploreOptions.vue'
 import ClientPage from '@/views/ClientPage.vue'
 import ClientSignup from '@/components/ClientSignup.vue'
-import EditProfile from '@/components/EditProfile.vue'
+import EditTwo from '@/components/EditTwo.vue'
 import SignIn from '@/views/SignIn.vue'
 import RestLogin from '@/views/RestLogin.vue'
-import RestSignup from '@/views/RestSignup.vue'
-import RestMain from '@/views/RestMain.vue'
+import RestSignup from '@/components/RestSignup.vue'
+import RestMain from '../views/RestMain.vue'
 import RestList from '@/components/RestList.vue'
 import ViewMenu from '@/views/ViewMenu.vue'
 
@@ -18,21 +18,18 @@ Vue.use(VueRouter)
 const routes = [
   {
     path : "/",
-    component : ExploreOptions,
-    meta: [
-      {
-        title: "Explore"
-      },
-    ],
+    name: 'home',
+    component: () => import('../views/RestMain.vue'),
+  },{
+
+    path : "/rest-main/:restaurantId",
+    name : 'rest-main',
+    component : RestMain
   },
         {
             path : "/client",
-            component : ClientPage,
-            meta: [
-              {
-              title: "Client"
-              },
-        ]},
+            component : ClientPage
+          },
         {
           path: "/signup",
           component : ClientSignup,
@@ -44,7 +41,7 @@ const routes = [
         },
         {
           path: "/edit",
-          component : EditProfile,
+          component : EditTwo,
           meta: [
             {
               title: "Edit User Info"

@@ -1,6 +1,6 @@
 <template>
     <v-app id="inspire">
-        <v-card class="mx-auto" max-width="400">
+        <v-card class="mx-auto">
             <v-img @click="openMenu" class="white--text align-end" height="200px" :src="RestBannerUrl">
                 <v-card-title @click="openMenu">{{ restName }}</v-card-title>
             </v-img>
@@ -30,6 +30,8 @@
 
 <script>
 import router from '@/router';
+// import cookies from 'vue-cookies';
+
 export default {
     name: "RestaurantCard",
     props: {

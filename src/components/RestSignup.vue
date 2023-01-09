@@ -26,9 +26,10 @@
                                             type="password" class="rounded-0" outlined></v-text-field>
                                         <v-text-field v-model="phoneNum" label="phoneNum" prepend-inner-icon="mdi-phone"
                                             type="phoneNum" class="rounded-0" outlined></v-text-field>
-                                        <!-- <v-text-field label="avatar" name="picture (optional)"
-                                                prepend-inner-icon="mdi-user" type="img" class="rounded-0"
-                                                outlined></v-text-field> -->
+                                        <v-text-field v-model="bannerUrl" label="banner Url (recommended)"
+                                            prepend-inner-icon="mdi-camera" class="rounded-0" outlined></v-text-field>
+                                        <v-text-field v-model="pictureUrl" label="picture Url (recommended)"
+                                            prepend-inner-icon="mdi-camera" class="rounded-0" outlined></v-text-field>
                                         <v-btn @click="restoReg" type="submit" class="rounded-0" color="#000000" x-large
                                             block dark>Register</v-btn>
                                         <v-card-actions class="text--secondary">
@@ -51,8 +52,7 @@
 
 <script>
 import axios from 'axios';
-// import { emit } from 'process';
-// import router from '@/router';
+import router from '@/router';
 import cookies from 'vue-cookies';
 
 export default {
@@ -66,8 +66,12 @@ export default {
             email: "",
             password: "",
             phoneNum: "",
-            bannerUrl: null,
-            profileUrl: null,
+            bannerUrl: {
+                type: String,
+            },
+            pictureUrl: {
+                type: String,
+            }
         }
     },
     methods: {
@@ -86,22 +90,20 @@ export default {
                     email: this.email,
                     password: this.password,
                     phoneNum: this.phoneNum,
-                    bannerUrl: null,
-                    profileUrl: null,
+                    bannerUrl: this.bannerUrl,
+                    pictureUrl: this.pictureUrl
                 },
             }).then((response) => {
-                console.log(response.data);
-                let restInfo = response.data.token;
-                cookies.set(`restToken`, restInfo);
+                let restToken = response.data
+                console.log(restToken);
+                cookies.get('restToken', response.data.token)
+                router.push("/rest-main")
             }).catch((error) => {
                 console.log(error);
             }).finally(() => {
                 console.log(`if you see this, it's not doing what you expect`);
             })
         }
-    },
-    mounted() {
-        console.log(this.$cookies.get(`restToken`.restaurantId));
     },
 }
 </script>
