@@ -1,6 +1,7 @@
 <template>
     <div>
-        <h2>Added to Order</h2>
+        <h2>SHOPPING CART</h2>
+        <h3>{{ order }}</h3>
     </div>
 </template>
 

@@ -91,14 +91,11 @@ export default {
                 router.push("/");
             }).catch((error) => {
                 console.log(error);
+                alert('That email is already registered with Foodie. Please sign in, or try again.')
             }).finally(() => {
                 console.log(`here we go again`);
             })
         },
-    },
-    mounted() {
-        let clientToken = cookies.get('token');
-        console.log(clientToken);
     }
 }
 </script>

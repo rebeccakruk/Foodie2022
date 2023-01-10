@@ -1,26 +1,23 @@
 <template>
     <div>
-        <!-- <div v-show="getCookie()"> -->
-        <h1>hi restaurant!</h1>
-        <!-- </div> -->
         {{ $route.params.restaurantId }}
-        <!-- <RestaurantCard /> -->
-        <p v-for="(item, index) in menu" :key="index">{{ item.name }}</p>
-        <h2>{{ item }}</h2>
-        <MenuCard />
-        <h2>testing testing 1 2 3</h2>
+
+        <RestaurantCard />
+
+        <MenuCard v-for="(item, index) in menu" :key="index" :menuItem="item.name" :menuPrice="item.price"
+            :menuDescription="item.description" :imageUrg="item.imageUrl" @buyItem="shoppingCart" />
     </div>
 </template>
 
 <script>
-// import RestaurantCard from '@/components/RestaurantCard.vue';
+import RestaurantCard from '@/components/RestaurantCard.vue';
 import axios from 'axios';
 import MenuCard from '@/components/MenuCard.vue';
 export default {
     name: "RestaurantFocus",
     components: {
         MenuCard,
-        // RestaurantCard
+        RestaurantCard
     },
     data() {
         return {
@@ -33,23 +30,29 @@ export default {
         getMenu() {
             axios.request({
                 url: "https://foodierest.ml/api/menu",
-                params: this.$route.params.restaurantId,
-                method: "GET",
+                params: {
+                    restaurantId: this.$route.params.restaurantId
+                },
+                method: 'GET',
                 headers: {
                     "x-api-key": process.env.VUE_APP_API_KEY,
                 },
             }).then((response) => {
+                console.log(response);
                 this.menu = response.data;
                 for (let i = 0; i < this.menu.length; i++)
                     console.log(this.menu);
             }).catch((error) => {
                 console.log(error);
+                alert('no food')
             });
         },
         getRestoInfo() {
             axios.request({
                 url: "https://foodierest.ml/api/restaurant",
-                params: this.$route.params.restaurantId,
+                params: {
+                    restaurantId: this.$route.params.restaurantId
+                },
                 method: 'GET',
                 headers: {
                     "x-api-key": process.env.VUE_APP_API_KEY,
@@ -58,6 +61,7 @@ export default {
                 console.log(response);
             }).catch((error) => {
                 console.log(error);
+                alert('no restaurant')
             });
         },
         getCookie(restToken) {
@@ -74,6 +78,11 @@ export default {
                 }
             }
             return "";
+        },
+        shoppingCart(item) {
+            this.cart.push(item);
+
+
         }
     },
     mounted() {
