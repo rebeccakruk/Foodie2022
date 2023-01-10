@@ -1,16 +1,16 @@
 <template>
     <div>
-        <EditTwo />
         <ClientProfile />
-        <ClientLogin />
-        <ClientSignup />
+        <EditTwo v-if="cookieWho()" />
+        <ClientLogin v-if="!cookieWho()" />
+        <!-- <ClientSignup /> -->
     </div>
 </template>
 
 <script>
 import ClientProfile from '@/components/ClientProfile.vue';
 import ClientLogin from '@/components/ClientLogin.vue';
-import ClientSignup from '@/components/ClientSignup.vue';
+// import ClientSignup from '@/components/ClientSignup.vue';
 import EditTwo from '@/components/EditTwo.vue';
 import cookies from 'vue-cookies';
 
@@ -20,26 +20,33 @@ export default {
         ClientProfile,
         ClientLogin,
         EditTwo,
-        ClientSignup
+        // ClientSignup
     },
     data() {
         return {
-            forceReload: 0
+            forceReload: 0,
+            imageSrc: ""
         }
     },
     methods: {
         cookieWho() {
-            let cookie = cookies.get('token')
-            if (cookies.get('token') === 'true') {
-                console.log(cookie, 'true');
+            let token = cookies.get('token')
+            if (token === null) {
+                return true
             } else {
-                console.log('false');
+                return true
             }
         },
         reload() {
             this.forceReload += 1
             console.log('this thing on?');
+        },
+        getProfilePic(src) {
+            this.imageSrc = src;
         }
+    },
+    mounted() {
+        this.$root.$on('picture', this.getProfilePic)
     },
     // mounted() {
     //     this.cookieWho();

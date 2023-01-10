@@ -1,35 +1,35 @@
 <template>
-    <v-app id="inspire">
-        <v-card class="mx-auto">
-            <v-img @click="openMenu" class="white--text align-end" height="200px" :src="RestBannerUrl">
-                <v-card-title @click="openMenu">{{ restName }}</v-card-title>
-            </v-img>
 
-            <v-card-subtitle class="pb-0">
-                {{ restBio }}
-            </v-card-subtitle>
+    <v-card class="mx-auto" width="500">
+        <v-img class="white--text align-end" height="200px" :src="RestBannerUrl">
+            <v-card-title>{{ restName }}</v-card-title>
+        </v-img>
 
-            <v-card-text class="text--primary">
-                <div>{{ restAddress }}</div>
+        <v-card-subtitle class="pb-0">
+            {{ restBio }}
+        </v-card-subtitle>
 
-                <div>{{ restCity }}</div>
-            </v-card-text>
+        <v-card-text class="text--primary">
+            <div>{{ restAddress }}</div>
 
-            <v-card-actions>
-                <v-btn color="orange" text>
-                    Orders
-                </v-btn>
+            <div>{{ restCity }}</div>
+        </v-card-text>
 
-                <v-btn color="orange" text>
-                    <router-link to="/menu">Explore Menu</router-link>
-                </v-btn>
-            </v-card-actions>
-        </v-card>
-    </v-app>
+        <v-card-actions>
+            <v-btn color="orange" text>
+                Orders
+            </v-btn>
+
+            <v-btn color="orange" text>
+                <!-- <router-link to="/menu">Explore Menu</router-link> -->
+            </v-btn>
+        </v-card-actions>
+    </v-card>
+
 </template>
 
 <script>
-import router from '@/router';
+// import router from '@/router';
 // import cookies from 'vue-cookies';
 
 export default {
@@ -48,9 +48,9 @@ export default {
         RestRestaurantID: Number
     },
     methods: {
-        openMenu() {
-            router.push("/menu")
-        }
+        // openMenu() {
+        //     router.push("/menu")
+        // }
     },
 }
 

@@ -29,7 +29,7 @@
                                         <v-card-actions class="text--secondary">
                                             <v-spacer></v-spacer>
                                             <!-- <RouterLink :to="{ name: 'SignUp' }">Sign Up</RouterLink> -->
-                                            Already registered? <router-link to="/login" class="pl-2"
+                                            Already registered? <router-link to="/signIn" class="pl-2"
                                                 style="color: #000000">Go
                                                 back
                                                 to Login</router-link>
@@ -70,7 +70,7 @@ export default {
         register() {
             axios.request({
                 url: `https://foodierest.ml/api/client`,
-                header: {
+                headers: {
                     "x-api-key": process.env.VUE_APP_API_KEY,
                 },
                 method: 'POST',
@@ -99,7 +99,6 @@ export default {
     mounted() {
         let clientToken = cookies.get('token');
         console.log(clientToken);
-        this.$root.$emit('token')
     }
 }
 </script>

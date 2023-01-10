@@ -96,7 +96,7 @@ export default {
             }).then((response) => {
                 let restToken = response.data
                 console.log(restToken);
-                cookies.get('restToken', response.data.token)
+                cookies.set('restToken', response.data.token)
                 router.push("/rest-main")
             }).catch((error) => {
                 console.log(error);

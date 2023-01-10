@@ -4,7 +4,6 @@
       alt="logo" />
     <HeaderPage />
     <router-view />
-    <!-- <SetUp /> -->
     <FooterPage />
   </div>
 </template>
@@ -12,24 +11,16 @@
 <script>
 import axios from "axios";
 axios.defaults.baseURL = "https://foodierest.ml/api/";
-axios.defaults.headers.common['Authorization'] = `localStorage.auth`;
 import HeaderPage from "@/components/HeaderPage.vue";
-// import SetUp from "@/components/SetUp.vue";
-
 import FooterPage from "@/components/FooterPage.vue";
-axios.defaults.headers.common['x-api-key'] = 'lGzWJ81l4YDt4UPA3aOWTjxDZUxZy2eTxrHjoPy9mPfqX'
 
 export default {
   name: 'App',
   components: {
     HeaderPage,
-    // SetUp,
     FooterPage,
   },
-  data: () => ({
-    //
-  }),
-};
+}
 </script>
 
 <style scoped>

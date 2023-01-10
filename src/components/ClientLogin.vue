@@ -58,7 +58,7 @@ export default {
         login() {
             axios.request({
                 url: `https://foodierest.ml/api/client-login`,
-                header: {
+                headers: {
                     "x-api-key": process.env.VUE_APP_API_KEY,
                 },
                 method: `POST`,

@@ -3,8 +3,6 @@
 
         <v-row justify="center">
             <v-col cols="12" sm="8">
-
-                <!-- <v-btn @click="loadClient">Load</v-btn> -->
                 <v-card>
 
                     <v-card-title class="orange darken-1">
@@ -104,7 +102,13 @@ export default {
             default: "https://m.media-amazon.com/images/M/MV5BOTkzNDg0ODg4MF5BMl5BanBnXkFtZTYwNDEwOTEz._V1_.jpg"
         },
         clientUsername: String
-    }
+    },
+    methods: {
+        sharePic() {
+            this.$root.$emit('this.clientImg')
+
+        }
+    },
 }
 
 </script>

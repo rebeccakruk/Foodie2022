@@ -1,15 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import ExploreOptions from '@/views/ExploreOptions.vue'
+import ExploreOptions from '@/views/ExploreOptions.vue'
 import ClientPage from '@/views/ClientPage.vue'
 import ClientSignup from '@/components/ClientSignup.vue'
+import ClientLogin from '@/components/ClientLogin.vue'
 import EditTwo from '@/components/EditTwo.vue'
-import SignIn from '@/views/SignIn.vue'
-import RestLogin from '@/views/RestLogin.vue'
+import RestLogin from '@/components/RestLogin.vue'
 import RestSignup from '@/components/RestSignup.vue'
 import RestMain from '../views/RestMain.vue'
 import RestList from '@/components/RestList.vue'
+import DeleteUser from '@/components/DeleteUser.vue'
 import ViewMenu from '@/views/ViewMenu.vue'
+import RestaurantFocus from '@/views/RestaurantFocus.vue'
 
 
 
@@ -19,12 +21,13 @@ const routes = [
   {
     path : "/",
     name: 'home',
-    component: () => import('../views/RestMain.vue'),
-  },{
-
-    path : "/rest-main/:restaurantId",
-    name : 'rest-main',
-    component : RestMain
+    component: ExploreOptions
+    // component: () => import('../views/RestaurantFocus.vue'),
+  },
+  {
+    path : '/restaurant/:restaurantId',
+    name : 'restaurant',
+    component : RestaurantFocus
   },
         {
             path : "/client",
@@ -77,7 +80,7 @@ const routes = [
         },
          {
           path: "/signIn",
-          component : SignIn,
+          component : ClientLogin,
           meta: [
             {
               title: "Sign In"
@@ -99,6 +102,15 @@ const routes = [
           meta: [
             {
               title: "Menu"
+            }
+          ]
+        },
+                 {
+          path: "/delete",
+          component : DeleteUser,
+          meta: [
+            {
+              title: "delete"
             }
           ]
         },

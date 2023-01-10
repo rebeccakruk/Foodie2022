@@ -26,13 +26,14 @@
                                         outlined></v-text-field>
                                     <v-btn @click="postIt" type="submit" class="rounded-0" color="#000000" x-large block
                                         dark>Submit Changes</v-btn>
+                                    <v-btn type="submit" class="rounded-0" color="#8255" large block dark><router-link
+                                            to="/delete" class="rounded-0" color:="#8255">Delete
+                                            Account</router-link></v-btn>
                                     <v-spacer></v-spacer>
-                                    <!-- <v-btn @click="deleted" type="submit" class="rounded-0" color="#8255" large block
-                                        dark><router-link to="/delete" class="rounded-0" color:="#8255">Delete
-                                            Account</router-link></v-btn> -->
                                     <v-card-actions class="text--secondary">
                                         <v-spacer></v-spacer>
-                                        <router-link to="/" class="pl-2" style="color: #000000">Home</router-link>
+                                        <router-link to="/restaurant/:restaurantId" class="pl-2"
+                                            style="color: #000000">Home</router-link>
                                     </v-card-actions>
                                 </v-form>
                             </v-card-text>
@@ -41,7 +42,6 @@
                 </v-row>
             </v-container>
         </v-main>
-        <v-btn @click="eraseUser(event)" type="submit">DELETE USER</v-btn>
     </div>
 </template>
 
@@ -62,6 +62,7 @@ export default {
             pictureUrl: {
                 type: String
             },
+            value: String,
         }
     },
     methods: {
@@ -84,26 +85,21 @@ export default {
                 }
             }).then((response) => {
                 console.log(response, 'hello!');
+                router.push('/')
             }).catch((error) => {
                 console.log(error);
             })
         },
-        // deletePage() {
-        //     router.push("/delete")
-        // }
-
-        // deleted() {
-        //     this.deleted = !this.deleted
-        // },
         eraseUser() {
             let token = cookies.get('token')
+            console.log(token);
             axios.request({
                 url: 'https://foodierest.ml/api/client',
-                method: 'DELETE',
                 headers: {
                     "x-api-key": process.env.VUE_APP_API_KEY,
                     "token": token
-                }
+                },
+                method: 'DELETE',
             }).then((response) => {
                 console.log(response);
                 cookies.remove('token')
