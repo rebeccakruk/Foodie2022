@@ -2,6 +2,9 @@
     <div>
         <v-banner class="banner">
             <template v-slot:actions>
+                <v-btn @click="navigateMenuAll">
+                    See All Menus
+                </v-btn>
                 <v-btn @click="navigateToLogin">
                     Sign in
                 </v-btn>
@@ -31,6 +34,10 @@ export default {
         navigateToSignup() {
             console.log(`loginbutton to signup`);
             router.push("/signup")
+        },
+        navigateMenuAll() {
+            console.log('loginbutton to menu all');
+            router.push("/menuAll")
         }
     }
 }

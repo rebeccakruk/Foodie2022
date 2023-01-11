@@ -1,6 +1,8 @@
 <template>
     <div>
-        <RestOwnerCard />
+        <RestOwnerCard v-for="resto in restoGet" :key="resto.restaurantId" :restCity="resto.city"
+            :restAddress="resto.address" :restPhoneNum="resto.phoneNum" :restBio="resto.bio" :restName="resto.name"
+            :restProfileUrl="resto.profileUrl" :restBannerUrl="resto.bannerUrl" />
     </div>
 </template>
 
@@ -18,7 +20,7 @@ export default {
     data() {
         return {
             restoGet: []
-        };
+        }
     },
     methods: {
         loadResto() {

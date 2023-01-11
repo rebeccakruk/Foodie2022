@@ -34,8 +34,6 @@
     </v-sheet>
 </template>
 
-
-
 <script>
 import axios from 'axios';
 // import RestaurantCard from '@/components/RestaurantCard.vue';

@@ -45,7 +45,8 @@ export default {
     data() {
         return {
             email: "",
-            password: ""
+            password: "",
+            restaurantId: Number,
         }
     },
     methods: {
@@ -61,8 +62,10 @@ export default {
                     password: this.password
                 },
             }).then((response) => {
-                cookies.set('restToken', response.data.token)
-                router.push('/restaurant')
+                let restToken = response.data
+                cookies.set('restToken')
+                router.push('/rest-main/:restaurantId')
+                console.log(restToken);
             }).catch((error) => {
                 console.log(error);
             })

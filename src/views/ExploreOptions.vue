@@ -5,8 +5,8 @@
             <router-view />
             <ClientBarCard v-if="userLoggedIn()" />
             <LoginButton v-if="!userLoggedIn()" />
-            <RestList />
             <RestLoginButton v-if="!restoLoggedIn()" />
+            <RestList />
         </nav>
     </div>
 

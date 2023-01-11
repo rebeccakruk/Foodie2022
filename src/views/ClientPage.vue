@@ -3,14 +3,12 @@
         <ClientProfile />
         <EditTwo v-if="cookieWho()" />
         <ClientLogin v-if="!cookieWho()" />
-        <!-- <ClientSignup /> -->
     </div>
 </template>
 
 <script>
 import ClientProfile from '@/components/ClientProfile.vue';
 import ClientLogin from '@/components/ClientLogin.vue';
-// import ClientSignup from '@/components/ClientSignup.vue';
 import EditTwo from '@/components/EditTwo.vue';
 import cookies from 'vue-cookies';
 
@@ -20,7 +18,6 @@ export default {
         ClientProfile,
         ClientLogin,
         EditTwo,
-        // ClientSignup
     },
     data() {
         return {

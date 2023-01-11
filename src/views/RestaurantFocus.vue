@@ -1,9 +1,8 @@
 <template>
     <div>
         {{ $route.params.restaurantId }}
-
-        <RestaurantCard />
-
+        <RestList />
+        <RestaurantCard v-for="name in restaurant" :key="name.restaurantId" :restName="name" />
         <MenuCard v-for="(item, index) in menu" :key="index" :menuItem="item.name" :menuPrice="item.price"
             :menuDescription="item.description" :imageUrg="item.imageUrl" @buyItem="shoppingCart" />
     </div>
@@ -12,12 +11,15 @@
 <script>
 import RestaurantCard from '@/components/RestaurantCard.vue';
 import axios from 'axios';
+import cookies from 'vue-cookies';
 import MenuCard from '@/components/MenuCard.vue';
+import RestList from '@/components/RestList.vue';
 export default {
     name: "RestaurantFocus",
     components: {
         MenuCard,
-        RestaurantCard
+        RestaurantCard,
+        RestList
     },
     data() {
         return {
@@ -40,8 +42,8 @@ export default {
             }).then((response) => {
                 console.log(response);
                 this.menu = response.data;
-                for (let i = 0; i < this.menu.length; i++)
-                    console.log(this.menu);
+                // for (let i = 0; i < this.menu.length; i++)
+                console.log(this.menu);
             }).catch((error) => {
                 console.log(error);
                 alert('no food')
@@ -64,36 +66,26 @@ export default {
                 alert('no restaurant')
             });
         },
-        getCookie(restToken) {
-            let name = restToken + "=";
-            let cookieName = decodeURIComponent(document.cookie)
-            let ck = cookieName.split(';');
-            for (let i = 0; i < ck.length; i++) {
-                let c = ck[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                }
+        restoLoggedIn() {
+            let resto = cookies.get('restToken')
+            console.log(resto);
+            if (resto == null) {
+                return false
+            } else {
+                return true
             }
-            return "";
         },
         shoppingCart(item) {
+            let order = cookies.set('order')
             this.cart.push(item);
-
-
+            alert('added to cart')
+            console.log(order);
         }
     },
     mounted() {
         this.getMenu();
-        this.getRestoInfo();
-        //     this.getCookie();
-        //     let restoCookie = this.getCookie('restaurantToken')
-        //     if (restoCookie) {
-        //         console.log(restoCookie);
-        //     }
-        // }
+        this.restoLoggedIn();
+        this.$on('buyItem', this.menuRestaurantId, this.menuId)
     }
 }
 

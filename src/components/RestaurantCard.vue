@@ -17,11 +17,7 @@
 
         <v-card-actions>
             <v-btn color="orange" text>
-                Orders
-            </v-btn>
-
-            <v-btn color="orange" text>
-                <!-- <router-link to="/menu">Explore Menu</router-link> -->
+                <router-link to="/menu">Explore Menu</router-link>
             </v-btn>
         </v-card-actions>
     </v-card>
@@ -43,9 +39,9 @@ export default {
         },
         restBio: String,
         restCity: String,
-        RestEmail: String,
-        RestPhoneNum: String,
-        RestRestaurantID: Number
+        restEmail: String,
+        restPhoneNum: String,
+        restRestaurantID: Number
     },
     methods: {
         // openMenu() {

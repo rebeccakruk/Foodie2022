@@ -6,8 +6,19 @@
 </template>
 
 <script>
+import cookies from 'vue-cookies';
 export default {
-    name: "ShoppingCart"
+    name: "ShoppingCart",
+    methods: {
+        getOrder() {
+            let added = cookies.get('order')
+            for (cartAdd of added)
+                console.log(added);
+        }
+    },
+    mounted() {
+        this.getOrder();
+    },
 }
 </script>
 

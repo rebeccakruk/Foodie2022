@@ -67,10 +67,10 @@ export default {
             password: "",
             phoneNum: "",
             bannerUrl: {
-                type: String,
+                type: null,
             },
             pictureUrl: {
-                type: String,
+                type: null,
             }
         }
     },
@@ -78,8 +78,8 @@ export default {
         restoReg() {
             axios.request({
                 url: "https://foodierest.ml/api/restaurant",
-                header: {
-                    "x-api-key": "lGzWJ81l4YDt4UPA3aOWTjxDZUxZy2eTxrHjoPy9mPfqX",
+                headers: {
+                    "x-api-key": process.env.VUE_APP_API_KEY,
                 },
                 method: `POST`,
                 data: {
@@ -95,9 +95,9 @@ export default {
                 },
             }).then((response) => {
                 let restToken = response.data
-                console.log(restToken);
                 cookies.set('restToken', response.data.token)
-                router.push("/rest-main")
+                console.log(restToken);
+                router.push("/rest-main/:restaurantId")
             }).catch((error) => {
                 console.log(error);
             }).finally(() => {

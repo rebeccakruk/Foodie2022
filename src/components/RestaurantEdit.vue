@@ -14,8 +14,8 @@
                             </v-img>
                             <v-card-text>
                                 <v-form>
-                                    <v-text-field v-model="name" label="name" prepend-inner-icon="mdi-pencil"
-                                        type="text" class="rounded-0" outlined></v-text-field>
+                                    <v-text-field label="name" prepend-inner-icon="mdi-pencil" type="text"
+                                        class="rounded-0" outlined></v-text-field>
 
                                     <v-text-field v-model="address" label="address" prepend-inner-icon="mdi-pencil"
                                         type="text" class="rounded-0" outlined></v-text-field>
@@ -63,12 +63,12 @@ export default {
     data() {
         return {
             name: String,
-            address: String,
-            bannerUrl: String,
-            bio: String,
+            address: "",
+            bannerUrl: "",
+            bio: "",
             city: String,
             email: String,
-            phoneNum: String,
+            phoneNum: Number,
             pictureUrl: String,
             restaurantId: Number,
             restaurants: []

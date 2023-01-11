@@ -7,9 +7,10 @@ import ClientLogin from '@/components/ClientLogin.vue'
 import EditTwo from '@/components/EditTwo.vue'
 import RestLogin from '@/components/RestLogin.vue'
 import RestSignup from '@/components/RestSignup.vue'
-import RestMain from '../views/RestMain.vue'
+import RestMain from '@/views/RestMain.vue'
 import RestList from '@/components/RestList.vue'
 import DeleteUser from '@/components/DeleteUser.vue'
+import MenuAll from '@/components/MenuAll.vue'
 import ViewMenu from '@/views/ViewMenu.vue'
 import RestaurantFocus from '@/views/RestaurantFocus.vue'
 
@@ -70,7 +71,7 @@ const routes = [
           ]
         },
         {
-          path: "/rest-main",
+          path: "/rest-main/:restaurantId",
           component : RestMain,
           meta: [
             {
@@ -84,6 +85,15 @@ const routes = [
           meta: [
             {
               title: "Sign In"
+            }
+          ]
+        },
+         {
+          path: "/menuAll",
+          component : MenuAll,
+          meta: [
+            {
+              title: "All Menu Items"
             }
           ]
         },

@@ -6,6 +6,7 @@
             <p>{{ menuDescription }}</p>
             <p>{{ menuPrice }}</p>
         </div>
+
         <v-btn @click="addToCart" outlined rounded text>
             Add to Cart
         </v-btn>
@@ -13,6 +14,7 @@
 </template>
 
 <script>
+import cookies from 'vue-cookies';
 export default {
     name: "MenuCard",
     props: {
@@ -24,13 +26,23 @@ export default {
             type: String,
             default: "https://cdn-icons-png.flaticon.com/512/562/562678.png"
         },
+        menuId: Number,
+        disabled: Boolean,
     },
     methods: {
         addToCart() {
-            this.$root.$emit('buyItem', this.menuItem)
-        }
+            let client = cookies.get('token')
+            if (client == null) {
+                return false
+            } else {
+                return true
+            }
+        },
+        // console.log('emitted');
+        // this.$emit('buyItem', this.menuRestaurantId, this.menuId)
     }
 }
+
 </script>
 
 <style scoped>
