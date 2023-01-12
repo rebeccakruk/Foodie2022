@@ -36,7 +36,7 @@ export default {
             router.push("/signup")
         },
         navigateMenuAll() {
-            console.log('loginbutton to menu all');
+            console.log('loginbutton to menu');
             router.push("/menuAll")
         }
     }

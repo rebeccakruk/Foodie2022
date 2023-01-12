@@ -32,8 +32,8 @@
                                     <v-spacer></v-spacer>
                                     <v-card-actions class="text--secondary">
                                         <v-spacer></v-spacer>
-                                        <router-link to="/restaurant/:restaurantId" class="pl-2"
-                                            style="color: #000000">Home</router-link>
+                                        <router-link to="/client-profile" class="pl-2"
+                                            style="color: #000000">Back</router-link>
                                     </v-card-actions>
                                 </v-form>
                             </v-card-text>
@@ -85,7 +85,7 @@ export default {
                 }
             }).then((response) => {
                 console.log(response, 'hello!');
-                router.push('/')
+                router.push("/client-profile")
             }).catch((error) => {
                 console.log(error);
             })

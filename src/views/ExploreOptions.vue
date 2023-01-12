@@ -1,12 +1,13 @@
 <template>
     <div>
-
+        <v-sheet :min-height="$vuetify.breakpoint.xs ? 300 : '20vh'" :rounded="$vuetify.breakpoint.xsOnly"></v-sheet>
         <nav>
             <router-view />
             <ClientBarCard v-if="userLoggedIn()" />
             <LoginButton v-if="!userLoggedIn()" />
             <RestLoginButton v-if="!restoLoggedIn()" />
             <RestList />
+            <RestoSignOut />
         </nav>
     </div>
 
@@ -18,6 +19,7 @@ import RestList from "@/components/RestList.vue";
 import RestLoginButton from "@/components/RestLoginButton.vue";
 import ClientBarCard from "@/components/ClientBarCard.vue";
 import cookies from 'vue-cookies';
+import RestoSignOut from "@/components/RestoSignOut.vue";
 
 
 export default {
@@ -26,7 +28,8 @@ export default {
         LoginButton,
         RestList,
         RestLoginButton,
-        ClientBarCard
+        ClientBarCard,
+        RestoSignOut
     },
     methods: {
         userLoggedIn() {

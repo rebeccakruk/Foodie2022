@@ -74,10 +74,6 @@ export default {
             })
         }
     },
-    mounted() {
-        let clientToken = cookies.get('token');
-        console.log(clientToken);
-    },
 }
 
 </script>

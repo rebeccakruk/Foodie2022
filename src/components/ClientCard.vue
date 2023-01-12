@@ -12,8 +12,8 @@
 
                         <v-spacer></v-spacer>
 
-                        <v-btn dark icon>
-                            <v-icon>mdi-pencil</v-icon>
+                        <v-btn dark icon><router-link to="/edit"><v-icon>mdi-pencil</v-icon></router-link>
+
                         </v-btn>
 
                     </v-card-title>
@@ -106,7 +106,6 @@ export default {
     methods: {
         sharePic() {
             this.$root.$emit('this.clientImg')
-
         }
     },
 }

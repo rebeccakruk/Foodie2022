@@ -1,6 +1,8 @@
 <template>
+
     <div>
-        <v-btn color="red">
+        <h1>Are you sure you wish to sign out?</h1>
+        <v-btn @click="restSignOut" color="red">
             Sign Out
         </v-btn>
     </div>
@@ -9,6 +11,8 @@
 <script>
 import axios from 'axios';
 import cookies from 'vue-cookies';
+import router from "@/router";
+
 
 export default {
     name: "RestoSignOut",
@@ -23,15 +27,14 @@ export default {
                 },
                 method: "DELETE",
             }).then((response) => {
-                this.cookies.remove('restToken')
+                let logout = cookies.remove('restToken')
+                console.log(logout, 'Deleting Cookies');
                 console.log(response);
+                router.push('/rest-admin')
             }).catch((error) => {
                 console.log(error);
             })
         }
-    },
-    mounted() {
-        this.restSignOut();
     },
 }
 </script>

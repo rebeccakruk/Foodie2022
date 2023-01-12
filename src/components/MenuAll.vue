@@ -2,9 +2,9 @@
     <div>
         <h2>You must be signed in to order!</h2>
         <v-btn><router-link class="text-decoration-none" :to="'/'">Go Back</router-link></v-btn>
-        <MenuCard v-for="(item, index) in menuItems" :key="index" :menuItem="item.name" :menuPrice="item.price"
-            :menuDescription="item.description" :imageUrg="item.imageUrl" @buyItem.prevent="message" disabled="disabled"
-            class="{disabled:disabled}" />
+
+        <MenuCard v-for="item in menu" :key="item.restaurantId" :menuItem="item.name"
+            :menuRestaurantId="item.restaurantId" :price="item.price" :imageUrl="item.imageUrl"></MenuCard>
     </div>
 </template>
 
@@ -19,19 +19,13 @@ export default {
     },
     data() {
         return {
-            menuItems: [],
-            showMessage: false,
-            // item: String,
-            // price: String,
-            // description: String,
-            // restaurantId: Number,
+            menu: [],
             imageUrl: {
                 type: String,
                 default: "https://cdn-icons-png.flaticon.com/512/562/562678.png"
             },
         }
-    },
-    methods: {
+    }, methods: {
         loadItems() {
             axios.request({
                 url: "https://foodierest.ml/api/menu",
@@ -40,19 +34,15 @@ export default {
                 },
                 method: 'GET'
             }).then((response) => {
-                this.menuItems = response.data
-                console.log(this.menuItems);
+                this.menu = response.data
+                console.log(this.menu);
             }).catch((error) => {
                 console.log(error);
             })
-        },
-        message() {
-            this.showMessage = !this.showMessage
         }
     },
     mounted() {
         this.loadItems();
-        this.message();
     },
 }
 </script>

@@ -1,21 +1,23 @@
 <template>
     <div>
-        <RestOwnerCard v-for="resto in restoGet" :key="resto.restaurantId" :restCity="resto.city"
+        <!-- {{ this.$route.params.restaurantId }} -->
+
+        <!-- <RestOwnerCard v-for="resto in restoGet" :key="resto.restaurantId" :restCity="resto.city"
             :restAddress="resto.address" :restPhoneNum="resto.phoneNum" :restBio="resto.bio" :restName="resto.name"
-            :restProfileUrl="resto.profileUrl" :restBannerUrl="resto.bannerUrl" />
+            :restProfileUrl="resto.profileUrl" :restBannerUrl="resto.bannerUrl" /> -->
     </div>
 </template>
 
 <script>
 import axios from 'axios';
 import cookies from 'vue-cookies';
-import RestOwnerCard from '@/components/RestOwnerCard.vue';
+// import RestOwnerCard from '@/components/RestOwnerCard.vue';
 
 
 export default {
     name: "RestaurantProfile",
     components: {
-        RestOwnerCard
+        // RestOwnerCard
     },
     data() {
         return {

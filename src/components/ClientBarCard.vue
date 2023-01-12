@@ -22,11 +22,11 @@
                                     <strong>{{ clientFName }}</strong>
                                 </v-col>
 
-                                <v-col class="text-no-wrap" size="10rem" cols="5" sm="3">
+                                <v-col size="10rem" cols="5" sm="3">
                                     Welcome to FOODee!
                                 </v-col>
                                 <v-col>
-                                    STILL STUCK ON WHAT TO PUT HERE
+
                                 </v-col>
                             </v-row>
                         </v-expansion-panel-header>

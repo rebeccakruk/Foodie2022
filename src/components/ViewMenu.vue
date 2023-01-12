@@ -1,7 +1,9 @@
 <template>
     <div>
-        <MenuCard v-for="item in menu" :key="item.restaurantId" :menuItem="item.name" :price="item.price"
-            :imageUrl="item.imageUrl"></MenuCard>
+        <MenuCard v-for="(item, index) in menu" :key="index" :menuItem="item.name" :price="item.price"
+            :imageUrl="item.imageUrl"><router-link class="text-decoration-none"
+                :to="'/restaurant/' + item.restaurantId"></router-link></MenuCard>
+
     </div>
 </template>
 

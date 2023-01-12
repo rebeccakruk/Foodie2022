@@ -35,9 +35,10 @@
                                         <v-card-actions class="text--secondary">
                                             <v-spacer></v-spacer>
                                             <!-- <RouterLink :to="{ name: 'SignUp' }">Sign Up</RouterLink> -->
-                                            Already registered? <a href="/login" class="pl-2" style="color: #000000">Go
+                                            Already registered? <router-link to="/login" class="pl-2"
+                                                style="color: #000000">Go
                                                 back
-                                                to Login</a>
+                                                to Login</router-link>
                                         </v-card-actions>
                                     </v-form>
                                 </v-card-text>
@@ -97,7 +98,7 @@ export default {
                 let restToken = response.data
                 cookies.set('restToken', response.data.token)
                 console.log(restToken);
-                router.push("/rest-main/:restaurantId")
+                router.push("rest-admin")
             }).catch((error) => {
                 console.log(error);
             }).finally(() => {

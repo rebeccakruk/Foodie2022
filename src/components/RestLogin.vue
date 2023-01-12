@@ -1,5 +1,6 @@
 <template>
     <div>
+        {{ $route.params.restaurantId }}
         <v-app>
             <v-main>
                 <v-container class="fill-height" fluid>
@@ -21,9 +22,9 @@
                                         <v-card-actions class="text--secondary">
                                             <v-checkbox color="#000000" label="Remember Me"></v-checkbox>
                                             <v-spacer></v-spacer>
-                                            <!-- <RouterLink :to="{ name: 'SignUp' }">Sign Up</RouterLink> -->
-                                            No account? <a href="/signup" class="pl-2" style="color: #000000">Sign
-                                                Up</a>
+                                            No account? <router-link to="/signup" class="pl-2"
+                                                style="color: #000000">Sign
+                                                Up</router-link>
                                         </v-card-actions>
                                     </v-form>
                                 </v-card-text>
@@ -37,16 +38,17 @@
 </template>
 
 <script>
+import router from "@/router";
 import axios from "axios";
-import router from '@/router';
 import cookies from 'vue-cookies';
+
 export default {
     name: "RestLogin",
     data() {
         return {
             email: "",
             password: "",
-            restaurantId: Number,
+            restId: Number,
         }
     },
     methods: {
@@ -59,19 +61,33 @@ export default {
                 method: `POST`,
                 data: {
                     email: this.email,
-                    password: this.password
+                    password: this.password,
+                    restaurantId: ""
                 },
             }).then((response) => {
                 let restToken = response.data
-                cookies.set('restToken')
-                router.push('/rest-main/:restaurantId')
+                cookies.set('restToken', response.data.token)
+                this.restId = response.data.restaurantId
+                cookies.set('restId', response.data.restaurantId)
+                console.log('restId');
+                router.push("rest-admin/")
                 console.log(restToken);
-            }).catch((error) => {
-                console.log(error);
             })
+                .catch((error) => {
+                    alert('You are already signed in')
+                    console.log(error);
+                })
         },
-    }
+        // setRestId() {
+        //     let restaurantId = cookies.set('restaurantId')
+        //     console.log(restaurantId);
+        // }
+    },
+    // mounted() {
+    //     this.setRestId();
+    // },
 }
+
 </script>
 
 <style scoped>

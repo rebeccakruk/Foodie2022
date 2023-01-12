@@ -1,7 +1,6 @@
 <template>
     <div>
         <ClientProfile />
-        <EditTwo v-if="cookieWho()" />
         <ClientLogin v-if="!cookieWho()" />
     </div>
 </template>
@@ -9,15 +8,13 @@
 <script>
 import ClientProfile from '@/components/ClientProfile.vue';
 import ClientLogin from '@/components/ClientLogin.vue';
-import EditTwo from '@/components/EditTwo.vue';
 import cookies from 'vue-cookies';
 
 export default {
     name: "ClientPage",
     components: {
         ClientProfile,
-        ClientLogin,
-        EditTwo,
+        ClientLogin
     },
     data() {
         return {

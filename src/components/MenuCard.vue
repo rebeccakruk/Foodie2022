@@ -38,8 +38,6 @@ export default {
                 return true
             }
         },
-        // console.log('emitted');
-        // this.$emit('buyItem', this.menuRestaurantId, this.menuId)
     }
 }
 

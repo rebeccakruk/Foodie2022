@@ -1,52 +1,55 @@
 <template>
-    <div>
-        {{ $route.params.restaurantId }}
-        <RestList />
-        <RestaurantCard v-for="name in restaurant" :key="name.restaurantId" :restName="name" />
-        <MenuCard v-for="(item, index) in menu" :key="index" :menuItem="item.name" :menuPrice="item.price"
-            :menuDescription="item.description" :imageUrg="item.imageUrl" @buyItem="shoppingCart" />
-    </div>
+    <section>
+
+        <!-- <div class="rest"> -->
+        <h2>Restaurant ID # {{ $route.params.restaurantId }}</h2>
+        <p v-for="food in menu" :key="food.restaurantId">{{ food.name }}</p>
+        <!-- <RestaurantCard v-for="rest in restaurant" :key="rest.restaurantId" :restName="rest.name"
+                :restBio="rest.bio" :src="rest.bannerUrl" :restAddress="rest.address" :restCity="rest.city" />
+        </div>
+        <div v-for="item in menu" :key="item.restaurantId">{{ item.name }}</div> -->
+        <!-- <ViewMenu /> -->
+
+    </section>
 </template>
 
 <script>
-import RestaurantCard from '@/components/RestaurantCard.vue';
+
+
 import axios from 'axios';
-import cookies from 'vue-cookies';
-import MenuCard from '@/components/MenuCard.vue';
-import RestList from '@/components/RestList.vue';
+// import router from "@/router";
+
+
 export default {
     name: "RestaurantFocus",
-    components: {
-        MenuCard,
-        RestaurantCard,
-        RestList
-    },
     data() {
         return {
             menu: [],
             restaurant: [],
             cart: []
-        }
+        };
     },
     methods: {
         getMenu() {
+            console.log(this.$route.params.restaurantId);
             axios.request({
                 url: "https://foodierest.ml/api/menu",
                 params: {
-                    restaurantId: this.$route.params.restaurantId
+                    restaurantId: this.$route.params.restaurantId,
+                    menuId: ""
                 },
-                method: 'GET',
+                method: "GET",
                 headers: {
                     "x-api-key": process.env.VUE_APP_API_KEY,
                 },
             }).then((response) => {
                 console.log(response);
-                this.menu = response.data;
-                // for (let i = 0; i < this.menu.length; i++)
-                console.log(this.menu);
+                for (let item of this.menu)
+                    console.log(item);
+                this.menu = response;
             }).catch((error) => {
                 console.log(error);
-                alert('no food')
+                alert("no food");
             });
         },
         getRestoInfo() {
@@ -55,38 +58,31 @@ export default {
                 params: {
                     restaurantId: this.$route.params.restaurantId
                 },
-                method: 'GET',
                 headers: {
                     "x-api-key": process.env.VUE_APP_API_KEY,
-                }
+                },
+                method: "GET"
             }).then((response) => {
                 console.log(response);
+                // router.push('/rest-admin')
             }).catch((error) => {
                 console.log(error);
-                alert('no restaurant')
+                alert("no restaurant");
             });
-        },
-        restoLoggedIn() {
-            let resto = cookies.get('restToken')
-            console.log(resto);
-            if (resto == null) {
-                return false
-            } else {
-                return true
-            }
-        },
-        shoppingCart(item) {
-            let order = cookies.set('order')
-            this.cart.push(item);
-            alert('added to cart')
-            console.log(order);
         }
     },
+    // shoppingCart(item) {
+    //     let order = cookies.set('order')
+    //     this.cart.push(item);
+    //     alert('added to cart')
+    //     console.log(order);
+    // },
     mounted() {
         this.getMenu();
-        this.restoLoggedIn();
-        this.$on('buyItem', this.menuRestaurantId, this.menuId)
-    }
+        this.getRestoInfo();
+        // this.$on('buyItem', this.menuRestaurantId, this.menuId)
+        // this.$on('openMenu')
+    },
 }
 
 </script>

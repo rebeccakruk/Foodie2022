@@ -65,7 +65,7 @@ export default {
             name: String,
             address: "",
             bannerUrl: "",
-            bio: "",
+            bio: String,
             city: String,
             email: String,
             phoneNum: Number,
@@ -76,11 +76,11 @@ export default {
     },
     methods: {
         confirmEdit() {
-            let restoToken = cookies.get('restToken')
+            let token = cookies.get('restToken')
             axios.request({
                 url: "https://foodierest.ml/api/restaurant",
                 headers: {
-                    "token": restoToken,
+                    "token": token,
                     "x-api-key": process.env.VUE_APP_API_KEY
                 },
                 method: "PATCH",
@@ -96,9 +96,10 @@ export default {
                     restaurantId: this.restaurantId
                 }
             }).then((response) => {
-                console.log(response);
+                console.log(response.data);
             }).catch((error) => {
                 console.log(error);
+                alert('nope')
             })
         },
         loadResto() {

@@ -7,13 +7,15 @@ import ClientLogin from '@/components/ClientLogin.vue'
 import EditTwo from '@/components/EditTwo.vue'
 import RestLogin from '@/components/RestLogin.vue'
 import RestSignup from '@/components/RestSignup.vue'
-import RestMain from '@/views/RestMain.vue'
 import RestList from '@/components/RestList.vue'
 import DeleteUser from '@/components/DeleteUser.vue'
 import MenuAll from '@/components/MenuAll.vue'
-import ViewMenu from '@/views/ViewMenu.vue'
+import ViewMenu from '@/components/ViewMenu.vue'
+import RestoSignOut from '@/components/RestoSignOut.vue'
+import RestaurantEdit from '@/components/RestaurantEdit.vue'
+import ClientProfile from '@/components/ClientProfile.vue'
 import RestaurantFocus from '@/views/RestaurantFocus.vue'
-
+import RestAdmin from '@/views/RestAdmin.vue'
 
 
 Vue.use(VueRouter)
@@ -26,13 +28,23 @@ const routes = [
     // component: () => import('../views/RestaurantFocus.vue'),
   },
   {
-    path : '/restaurant/:restaurantId',
+    path : '/restaurant/:restaurantId/',
     name : 'restaurant',
-    component : RestaurantFocus
+    component : RestaurantFocus,
+    props: true
   },
         {
             path : "/client",
             component : ClientPage
+          },
+        {
+            path : "/client-profile",
+            component : ClientProfile
+          },
+          {
+            path: "/rest-admin/",
+            name: 'rest-admin',
+            component : RestAdmin
           },
         {
           path: "/signup",
@@ -53,6 +65,11 @@ const routes = [
           ]
         },
         {
+          path: "/edit-rest",
+          name : "edit-rest",
+          component : RestaurantEdit
+        },
+        {
           path: "/rest-login",
           component : RestLogin,
           meta: [
@@ -71,15 +88,10 @@ const routes = [
           ]
         },
         {
-          path: "/rest-main/:restaurantId",
-          component : RestMain,
-          meta: [
-            {
-              title: "Restaurant Main"
-            }
-          ]
+          path: "/rest-signout",
+          component : RestoSignOut,
         },
-         {
+        {
           path: "/signIn",
           component : ClientLogin,
           meta: [
@@ -100,18 +112,11 @@ const routes = [
                  {
           path: "/restList",
           component : RestList,
-          meta: [
+          children: [
             {
-              title: "Restaurant List"
-            }
-          ]
-        },
-                 {
-          path: "/menu",
-          component : ViewMenu,
-          meta: [
-            {
-              title: "Menu"
+              name: "viewmenu",
+              path: "/menu",
+              component: ViewMenu
             }
           ]
         },
