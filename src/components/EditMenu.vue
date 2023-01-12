@@ -1,6 +1,5 @@
 <template>
     <div>
-        {{ $route.params.restaurantId }}
         <v-app>
             <v-main>
                 <v-container class="fill-height" fluid>
@@ -19,15 +18,15 @@
                                             outlined></v-text-field>
                                         <v-text-field v-model="price" label="price" class="rounded-0"
                                             outlined></v-text-field>
-                                        <v-text-field v-model="imageUrl" label="picture" class="rounded-0"
+                                        <v-text-field v-model="imageUrl" label="picture url" class="rounded-0"
                                             outlined></v-text-field>
                                         <v-btn @click="newItem" type="submit" class="rounded-0" color="#000000" x-large
                                             block dark>Add New Item</v-btn>
                                         <v-card-actions class="text--secondary">
                                             <v-checkbox color="#000000" label="Remember Me"></v-checkbox>
                                             <v-spacer></v-spacer>
-                                            <rounter-link to="/rest-admin" class="pl-2" style="color: #000000">Go
-                                                Back</rounter-link>
+                                            <router-link to="/rest-admin" class="pl-2" style="color: #000000">Go
+                                                Back</router-link>
                                         </v-card-actions>
                                     </v-form>
                                 </v-card-text>
@@ -42,6 +41,7 @@
 
 <script>
 import axios from 'axios';
+import router from '@/router';
 import cookies from 'vue-cookies';
 
 export default {
@@ -51,9 +51,7 @@ export default {
             name: "",
             description: "",
             price: "",
-            imageUrl: {
-                type: String,
-            }
+            imageUrl: ""
         }
     },
     methods: {
@@ -75,10 +73,8 @@ export default {
             }).then((response) => {
                 let menu = response.data
                 console.log(menu);
-
-
+                router.push('/rest-admin')
             })
-
         }
     },
 }

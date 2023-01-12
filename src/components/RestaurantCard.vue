@@ -25,7 +25,6 @@
 </template>
 
 <script>
-// import router from '@/router';
 // import cookies from 'vue-cookies';
 
 export default {

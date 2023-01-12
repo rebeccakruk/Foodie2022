@@ -14,6 +14,7 @@ import ViewMenu from '@/components/ViewMenu.vue'
 import RestoSignOut from '@/components/RestoSignOut.vue'
 import RestaurantEdit from '@/components/RestaurantEdit.vue'
 import ClientProfile from '@/components/ClientProfile.vue'
+import EditMenu from '@/components/EditMenu.vue'
 import RestaurantFocus from '@/views/RestaurantFocus.vue'
 import RestAdmin from '@/views/RestAdmin.vue'
 
@@ -68,6 +69,11 @@ const routes = [
           path: "/edit-rest",
           name : "edit-rest",
           component : RestaurantEdit
+        },
+        {
+          path: "/edit-menu",
+          name : "edit-menu",
+          component : EditMenu
         },
         {
           path: "/rest-login",

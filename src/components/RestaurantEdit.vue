@@ -1,8 +1,5 @@
 <template>
     <div>
-        <div v-for="rest in restaurants" :key="rest.id">
-            <router-link :to="'/rest-main/' + rest.id">{{ rest.name }}</router-link>
-        </div>
         <v-main>
             <v-container class="fill-height" fluid>
                 <v-row alignment="center" justify="center" dense>
@@ -56,6 +53,7 @@
 
 <script>
 import axios from 'axios';
+import router from '@/router';
 import cookies from 'vue-cookies';
 
 export default {
@@ -112,6 +110,7 @@ export default {
             }).then((response) => {
                 let info = response.data
                 console.log(info);
+                router.push("/rest-admin")
             }).catch((error) => {
                 console.log(error);
             })
